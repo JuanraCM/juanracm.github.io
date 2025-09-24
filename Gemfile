@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 
 gem 'webrick'
 
+gem 'listen'
+
 gem 'commonmarker'
 
 gem 'rubocop'

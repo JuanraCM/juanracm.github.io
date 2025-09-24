@@ -27,3 +27,11 @@ bundle exec ruby serve.rb
 ```
 
 The site will be available at `http://localhost:8000`.
+
+## Running Tests
+
+To run the tests, use the following command:
+
+```sh
+bin/rspec
+```

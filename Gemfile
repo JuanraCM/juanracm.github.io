@@ -10,4 +10,6 @@ gem 'commonmarker'
 
 gem 'rubocop'
 
+gem 'rspec'
+
 gem 'pry'

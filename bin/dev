@@ -1,9 +1,12 @@
+#!/usr/bin/env ruby
+#
 # frozen_string_literal: true
 
-require_relative 'lib/ssg'
-
+require 'bundler/setup'
 require 'listen'
 require 'webrick'
+
+require_relative '../lib/builder'
 
 listener = Listen.to('assets', 'layouts', 'pages') do |_modified, _added, _removed|
   puts 'Changes detected. Rebuilding site...'

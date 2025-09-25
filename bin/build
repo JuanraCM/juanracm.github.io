@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+#
+# frozen_string_literal: true
+
+require 'bundler/setup'
+
+require_relative '../lib/builder'
+
+SSG::Builder.prepare_output_dir
+SSG::Builder.build

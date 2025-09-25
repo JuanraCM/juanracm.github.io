@@ -17,16 +17,24 @@ cd personal_blog && bundle install
 To build the static site, run the following command:
 
 ```sh
-bundle exec ruby build.rb
+bin/build
 ```
 
 To serve the site locally, run:
 
 ```sh
-bundle exec ruby serve.rb
+bin/serve
 ```
 
 The site will be available at `http://localhost:8000`.
+
+### Options
+
+You can specify a different port for the local server by using the `-p` or `--port` option:
+
+```sh
+bin/serve -p 8080
+```
 
 ## Running Tests
 

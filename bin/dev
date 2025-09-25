@@ -3,29 +3,26 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'listen'
-require 'webrick'
+require 'optparse'
 
 require_relative '../lib/builder'
-
-listener = Listen.to('assets', 'layouts', 'pages') do |_modified, _added, _removed|
-  puts 'Changes detected. Rebuilding site...'
-
-  SSG.prepare_output_dir
-  SSG.build
-
-  puts 'Site rebuilt.'
-end
-
-puts 'Starting file listener...'
-listener.start
+require_relative '../lib/server'
+require_relative '../lib/hot_reload'
 
 port = 8000
-build_dir = File.expand_path('build')
 
-server = WEBrick::HTTPServer.new(Port: port, DocumentRoot: build_dir)
+OptionParser.new do |opts|
+  opts.banner = "Usage: bin/dev [options]"
 
-trap('INT') { server.shutdown }
+  opts.on('-p', '--port PORT', 'Specify the port to run the server on (default: 8000)') do |p|
+    port = p.to_i
+  end
 
-puts "Serving #{build_dir} at http://localhost:#{port}"
-server.start
+  opts.on('-h', '--help', 'Display this help message') do
+    puts opts
+    exit
+  end
+end.parse!
+
+SSG::HotReload.start
+SSG::Server.new(port).start

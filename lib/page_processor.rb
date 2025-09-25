@@ -3,14 +3,18 @@
 require 'commonmarker'
 require 'yaml'
 
+require_relative 'config'
+
 module SSG
   class PageProcessor
     def self.process_all
       pages = {}
-      Dir.glob("#{SSG::PAGES_DIR}/**/*.md") do |page_file|
+
+      Dir.glob("#{PAGES_DIR}/**/*.md") do |page_file|
         page_path = page_file.sub("#{PAGES_DIR}/", '').sub('.md', '')
         pages[page_path] = process_page(page_file)
       end
+
       pages
     end
 

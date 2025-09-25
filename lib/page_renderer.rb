@@ -2,6 +2,8 @@
 
 require 'erb'
 
+require_relative 'config'
+
 module SSG
   class PageRenderer
     def initialize(layouts)
@@ -26,7 +28,7 @@ module SSG
         content: page_data[:content]
       )
 
-      output_path = File.join(SSG::BUILD_DIR, "#{page_path}.html")
+      output_path = File.join(BUILD_DIR, "#{page_path}.html")
       File.write(output_path, template_result)
     end
   end

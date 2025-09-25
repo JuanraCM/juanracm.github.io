@@ -2,10 +2,12 @@
 
 require 'fileutils'
 
+require_relative 'config'
+
 module SSG
   class AssetCopier
     def self.copy_assets
-      FileUtils.cp_r(SSG::ASSETS_DIR, SSG::BUILD_DIR)
+      FileUtils.cp_r(ASSETS_DIR, BUILD_DIR)
     end
   end
 end

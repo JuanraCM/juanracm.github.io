@@ -1,18 +1,11 @@
 ---
-title: My Blog
+title: Juanra Carretero
 layout: home
+image_url: https://avatars.githubusercontent.com/u/44867213
+github_url: https://github.com/JuanraCM
+github_username: JuanraCM
 ---
 
-## Welcome to my blog!
+# Juanra Carretero
 
-This is a simple blog built with Markdown and a custom static site generator. Here, I share my thoughts, experiences, and knowledge on various topics.
-
-Here is some code:
-
-```ruby
-def hello_world
-  puts 'Hello, world!'
-end
-
-hello_world
-```
+Welcome to my blog! Here, I share my thoughts, experiences, and knowledge on programming and technology in general.

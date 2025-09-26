@@ -7,6 +7,19 @@
     <link href="assets/styles.css" rel="stylesheet">
   </head>
   <body>
-    <%= content %>
+    <div class="container">
+      <div class="container__header">
+        <div class="container__header__content">
+          <%= content %>
+
+          <div class="container__header__social">
+            <a href="<%= meta[:github_url] %>" target="_blank">
+              GitHub
+            </a>
+          </div>
+        </div>
+        <img class="container__header__image" src="<%= meta[:image_url] %>" alt="Juanra">
+      </div>
+    </div>
   </body>
 </html>

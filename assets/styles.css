@@ -1,12 +1,44 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+:root {
+  --fonts-primary: sans-serif;
+  --colors-background: #f4f4f4;
+  --colors-text-primary: #11181c;
+}
 
-  h1 {
-    color: #333;
-    text-align: center;
-    margin-top: 20px;
+body {
+  background-color: var(--colors-background);
+  font-family: var(--fonts-primary);
+  margin: 0;
+  width: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  a {
+    font-weight: 600;
+    color: var(--colors-text-primary);
+  }
+
+  .container {
+    widht: 100%;
+    max-width: 740px;
+    margin: 65px auto;
+    padding: 0 65px;
+
+    .container__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .container__header__content {
+        max-width: 450px;
+      }
+
+      .container__header__image {
+        border-radius: 100%;
+        width: 150px;
+        height: auto;
+      }
+    }
   }
 }

@@ -23,7 +23,7 @@ bin/build
 To serve the site locally, run:
 
 ```sh
-bin/serve
+bin/dev
 ```
 
 The site will be available at `http://localhost:8000`.
@@ -33,7 +33,7 @@ The site will be available at `http://localhost:8000`.
 You can specify a different port for the local server by using the `-p` or `--port` option:
 
 ```sh
-bin/serve -p 8080
+bin/dev -p 8080
 ```
 
 ## Running Tests

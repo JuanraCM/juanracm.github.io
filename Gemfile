@@ -8,6 +8,8 @@ gem 'listen'
 
 gem 'commonmarker'
 
+gem 'logger'
+
 gem 'rubocop'
 
 gem 'rspec'

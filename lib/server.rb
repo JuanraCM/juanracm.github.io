@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'config'
+require_relative 'event_logger'
 
 require 'webrick'
 
@@ -14,8 +15,14 @@ module SSG
     def start
       trap('INT') { @server.shutdown }
 
-      puts "Serving #{BUILD_DIR} at http://localhost:#{@port}"
+      logger.info "Serving #{BUILD_DIR} at http://localhost:#{@port}"
       @server.start
+    end
+
+    private
+
+    def logger
+      @logger ||= SSG::EventLogger.new('Server')
     end
   end
 end

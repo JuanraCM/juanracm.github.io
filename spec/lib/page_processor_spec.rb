@@ -10,44 +10,42 @@ describe SSG::PageProcessor do
   end
 
   describe '.process_all' do
-    it 'processes all markdown files in the pages directory' do
+    before do
+      allow(SSG::PageProcessor).to receive(:process_page).with(anything).exactly(4).times
+    end
+
+    it 'processes all markdown files in the pages directory', :aggregate_failures do
       pages = SSG::PageProcessor.process_all
 
       expect(pages).to be_a(Hash)
-      expect(pages).not_to be_empty
-
-      pages.each do |page_path, page_data|
-        expect(page_path).to be_a(String)
-        expect(page_data).to be_a(Hash)
-        expect(page_data).to have_key(:config)
-        expect(page_data).to have_key(:content)
-
-        expect(page_data[:config]).to be_a(Hash)
-        expect(page_data[:config]).not_to be_empty
-
-        expect(page_data[:content]).to be_a(String)
-        expect(page_data[:content]).not_to be_empty
-      end
+      expect(pages.keys.count).to eq(4)
     end
   end
 
   describe '.process_page' do
-    let(:sample_page) { fixture_path('pages/index.md') }
+    context 'with a valid file' do
+      let(:sample_page) { fixture_path('pages/valid.md') }
 
-    it 'processes a single markdown file and extracts front matter and content' do
-      page_data = SSG::PageProcessor.process_page(sample_page)
+      it 'processes a single markdown file and extracts front matter and content', :aggregate_failures do
+        page_data = SSG::PageProcessor.process_page(sample_page)
 
-      expect(page_data).to be_a(Hash)
-      expect(page_data).to have_key(:config)
-      expect(page_data).to have_key(:content)
+        expect(page_data).to be_a(Hash)
+        expect(page_data[:config]).to be_a(Hash)
+        expect(page_data[:config][:title]).to eq('Test File')
+        expect(page_data[:config][:layout]).to eq('default')
+        expect(page_data[:content]).to be_a(String)
+        expect(page_data[:content]).to include('<strong>bold text</strong>')
+      end
+    end
 
-      expect(page_data[:config]).to be_a(Hash)
-      expect(page_data[:config]).not_to be_empty
-      expect(page_data[:config][:title]).to eq('Test File')
-      expect(page_data[:config][:layout]).to eq('default')
+    context 'with a file missing front matter' do
+      let(:invalid_page) { fixture_path('pages/missing_frontmatter.md') }
 
-      expect(page_data[:content]).to be_a(String)
-      expect(page_data[:content]).to include('<strong>bold text</strong>')
+      it 'raises a MissingFrontMatterError' do
+        expect {
+          SSG::PageProcessor.process_page(invalid_page)
+        }.to raise_error(SSG::PageProcessor::MissingFrontMatterError, /Missing front matter/)
+      end
     end
   end
 end

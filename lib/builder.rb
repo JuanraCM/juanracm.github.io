@@ -20,6 +20,8 @@ module SSG
       renderer.render_all(pages)
 
       AssetCopier.copy_assets
+    rescue SSGError => e
+      puts "Build failed: #{e.message}"
     end
 
     def self.prepare_output_dir

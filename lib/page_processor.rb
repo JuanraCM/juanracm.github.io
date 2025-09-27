@@ -7,6 +7,8 @@ require_relative 'config'
 
 module SSG
   class PageProcessor
+    class MissingFrontMatterError < SSGError; end
+
     def self.process_all
       pages = {}
 
@@ -25,8 +27,11 @@ module SSG
         options: { extension: { front_matter_delimiter: '---' } }
       )
 
-      # TODO: Handle missing front matter
       front_matter = parsed_content.first
+      unless front_matter&.type == :frontmatter
+        raise MissingFrontMatterError, "Missing front matter in #{page_file}"
+      end
+
       page_config = YAML.safe_load(front_matter.to_commonmark).transform_keys(&:to_sym)
 
       {

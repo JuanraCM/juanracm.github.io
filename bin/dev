@@ -24,5 +24,7 @@ OptionParser.new do |opts|
   end
 end.parse!
 
+ENV['SSG_HR'] = 'true'
+
 SSG::HotReload.start
 SSG::Server.new(port).start

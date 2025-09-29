@@ -3,6 +3,7 @@
 require 'erb'
 
 require_relative 'config'
+require_relative 'hot_reload'
 
 module SSG
   class PageRenderer
@@ -33,33 +34,10 @@ module SSG
         meta: page_data[:config],
         content: page_data[:content]
       )
-      inject_hr_snippet(template_result) if ENV['SSG_HR'] == 'true'
+      SSG::HotReload.inject_html_snippet(template_result)
 
       output_path = File.join(BUILD_DIR, "#{page_path}.html")
       File.write(output_path, template_result)
-    end
-
-    def inject_hr_snippet(html)
-      hr_snippet = <<~HTML
-        <script>
-          let refreshedAt;
-
-          setInterval(() => {
-            console.info('Checking for updates...');
-
-            fetch('refresh.txt')
-              .then(response => response.text())
-              .then(data => {
-                if (refreshedAt && refreshedAt !== data) {
-                  window.location.reload();
-                }
-                refreshedAt = data;
-              });
-          }, 500);
-        </script>
-      HTML
-
-      html.sub!('</body>', "#{hr_snippet}</body>")
     end
   end
 end

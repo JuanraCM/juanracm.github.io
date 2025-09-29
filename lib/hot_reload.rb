@@ -9,6 +9,7 @@ module SSG
   module HotReload
     class << self
       def start
+        @enabled = true
         listener = Listen.to(*target_directories) do |modified, added, removed|
           logger.debug 'Changes detected. Rebuilding site...'
 
@@ -27,6 +28,33 @@ module SSG
         listener.start
       end
 
+      def inject_html_snippet(html)
+        return html unless @enabled
+
+        hr_snippet = <<~HTML
+          <script>
+            let refreshedAt;
+
+            setInterval(() => {
+              console.info('Checking for updates...');
+
+              fetch('refresh.txt')
+                .then(response => response.text())
+                .then(data => {
+                  if (refreshedAt && refreshedAt !== data) {
+                    window.location.reload();
+                  }
+                  refreshedAt = data;
+                });
+            }, 500);
+          </script>
+        HTML
+
+        html.sub!('</body>', "#{hr_snippet}</body>")
+      end
+
+      private
+
       def target_directories
         [
           ASSETS_DIR,
@@ -39,8 +67,6 @@ module SSG
         timestamp_file = File.join(BUILD_DIR, 'refresh.txt')
         File.write(timestamp_file, Time.now.to_s)
       end
-
-      private
 
       def logger
         @logger ||= SSG::EventLogger.new('HotReload')

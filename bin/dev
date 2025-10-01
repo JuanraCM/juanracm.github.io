@@ -25,4 +25,8 @@ OptionParser.new do |opts|
 end.parse!
 
 SSG::HotReload.start
+
+SSG::Builder.prepare_output_dir
+SSG::Builder.build
+
 SSG::Server.new(port).start

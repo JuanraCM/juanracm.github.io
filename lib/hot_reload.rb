@@ -7,6 +7,8 @@ require 'listen'
 
 module SSG
   module HotReload
+    SNIPPET_UPDATE_THRESHOLD = 500
+
     class << self
       def start
         @enabled = true
@@ -31,7 +33,7 @@ module SSG
       def inject_html_snippet(html)
         return html unless @enabled
 
-        hr_snippet = <<~HTML
+        hr_snippet = <<~EOF
           <script>
             let refreshedAt;
 
@@ -46,9 +48,9 @@ module SSG
                   }
                   refreshedAt = data;
                 });
-            }, 500);
+            }, #{SNIPPET_UPDATE_THRESHOLD});
           </script>
-        HTML
+        EOF
 
         html.sub!('</body>', "#{hr_snippet}</body>")
       end

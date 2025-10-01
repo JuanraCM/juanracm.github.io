@@ -11,8 +11,8 @@ describe SSG::Builder do
     before do
       allow(FileUtils).to receive(:rm_rf).once
       allow(FileUtils).to receive(:mkdir_p).once
-      allow(SSG::LayoutLoader).to receive(:load_all).and_return({}).once
-      allow(SSG::PageProcessor).to receive(:process_all).and_return({}).once
+      allow(SSG::FileLoader).to receive(:load_layouts).and_return({}).once
+      allow(SSG::FileLoader).to receive(:load_pages).and_return({}).once
       allow(SSG::PageRenderer).to receive(:new).and_return(renderer)
       allow(renderer).to receive(:render_all).once
       allow(SSG::AssetCopier).to receive(:copy_assets).once
@@ -26,7 +26,7 @@ describe SSG::Builder do
 
     describe 'build with error' do
       before do
-        allow(SSG::LayoutLoader).to receive(:load_all)
+        allow(SSG::FileLoader).to receive(:load_layouts)
           .and_raise(SSG::SSGError, 'Layout load error')
       end
 

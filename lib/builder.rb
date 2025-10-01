@@ -3,8 +3,7 @@
 require 'fileutils'
 
 require_relative 'config'
-require_relative 'layout_loader'
-require_relative 'page_processor'
+require_relative 'file_loader'
 require_relative 'page_renderer'
 require_relative 'asset_copier'
 require_relative 'event_logger'
@@ -15,8 +14,8 @@ module SSG
       def build
         prepare_output_dir
 
-        layouts = LayoutLoader.load_all
-        pages = PageProcessor.process_all
+        layouts = FileLoader.load_layouts
+        pages = FileLoader.load_pages
 
         renderer = PageRenderer.new(layouts)
         renderer.render_all(pages)

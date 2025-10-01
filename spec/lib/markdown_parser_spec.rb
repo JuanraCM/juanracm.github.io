@@ -2,32 +2,15 @@
 
 require 'spec_helper'
 
-require_relative '../../lib/page_processor'
+require_relative '../../lib/markdown_parser'
 
-describe SSG::PageProcessor do
-  before do
-    stub_const('SSG::PAGES_DIR', fixture_path('pages'))
-  end
-
-  describe '.process_all' do
-    before do
-      allow(SSG::PageProcessor).to receive(:process_page).with(anything).exactly(4).times
-    end
-
-    it 'processes all markdown files in the pages directory', :aggregate_failures do
-      pages = SSG::PageProcessor.process_all
-
-      expect(pages).to be_a(Hash)
-      expect(pages.keys.count).to eq(4)
-    end
-  end
-
-  describe '.process_page' do
+describe SSG::MarkdownParser do
+  describe '.parse' do
     context 'with a valid file' do
       let(:sample_page) { fixture_path('pages/valid.md') }
 
       it 'processes a single markdown file and extracts front matter and content', :aggregate_failures do
-        page_data = SSG::PageProcessor.process_page(sample_page)
+        page_data = SSG::MarkdownParser.parse(sample_page)
 
         expect(page_data).to be_a(Hash)
         expect(page_data[:config]).to be_a(Hash)
@@ -43,8 +26,8 @@ describe SSG::PageProcessor do
 
       it 'raises a MissingFrontMatterError' do
         expect {
-          SSG::PageProcessor.process_page(invalid_page)
-        }.to raise_error(SSG::PageProcessor::MissingFrontMatterError, /Missing front matter/)
+          SSG::MarkdownParser.parse(invalid_page)
+        }.to raise_error(SSG::MarkdownParser::MissingFrontMatterError, /Missing front matter/)
       end
     end
   end

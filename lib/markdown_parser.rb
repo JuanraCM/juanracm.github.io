@@ -6,21 +6,10 @@ require 'yaml'
 require_relative 'config'
 
 module SSG
-  class PageProcessor
+  class MarkdownParser
     class MissingFrontMatterError < SSGError; end
 
-    def self.process_all
-      pages = {}
-
-      Dir.glob("#{PAGES_DIR}/**/*.md") do |page_file|
-        page_path = page_file.sub("#{PAGES_DIR}/", '').sub('.md', '')
-        pages[page_path] = process_page(page_file)
-      end
-
-      pages
-    end
-
-    def self.process_page(page_file)
+    def self.parse(page_file)
       page_content = File.read(page_file)
       parsed_content = Commonmarker.parse(
         page_content,

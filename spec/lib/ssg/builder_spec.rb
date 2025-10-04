@@ -20,7 +20,7 @@ describe SSG::Builder do
 
     describe 'successful build' do
       it 'builds successfully' do
-        SSG::Builder.build
+        expect { described_class.build }.not_to raise_error
       end
     end
 
@@ -31,9 +31,7 @@ describe SSG::Builder do
       end
 
       it 'handles errors gracefully' do
-        expect {
-          SSG::Builder.build
-        }.not_to raise_error
+        expect { described_class.build }.not_to raise_error
       end
     end
   end

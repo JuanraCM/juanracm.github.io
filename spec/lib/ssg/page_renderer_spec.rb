@@ -53,9 +53,9 @@ describe SSG::PageRenderer do
       end
 
       it 'raises MissingLayoutError when layout is not specified' do
-        expect {
+        expect do
           renderer.render_all(pages)
-        }.to raise_error(SSG::PageRenderer::MissingLayoutError, /Layout not specified/)
+        end.to raise_error(SSG::PageRenderer::MissingLayoutError, /Layout not specified/)
       end
     end
 
@@ -71,9 +71,9 @@ describe SSG::PageRenderer do
       end
 
       it 'raises MissingTemplateError when layout template is not found' do
-        expect {
+        expect do
           renderer.render_all(pages)
-        }.to raise_error(SSG::PageRenderer::MissingTemplateError, /Layout 'nonexistent' not found/)
+        end.to raise_error(SSG::PageRenderer::MissingTemplateError, /Layout 'nonexistent' not found/)
       end
     end
   end

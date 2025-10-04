@@ -1,10 +1,12 @@
+plugins:
+  - rubocop-rspec
+
 AllCops:
   NewCops: enable
   TargetRubyVersion: 3.0
   Exclude:
     - 'bin/**/*'
     - 'build/**/*'
-    - 'spec/**/*'
 
 Style/Documentation:
   Enabled: false

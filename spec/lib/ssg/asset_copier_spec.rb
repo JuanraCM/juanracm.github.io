@@ -15,10 +15,14 @@ describe SSG::AssetCopier do
   end
 
   describe '.copy_assets' do
-    it 'copies assets from ASSETS_DIR to BUILD_DIR' do
-      expect(FileUtils).to receive(:cp_r).with(assets_dir, build_dir)
+    before do
+      allow(FileUtils).to receive(:cp_r)
 
-      SSG::AssetCopier.copy_assets
+      described_class.copy_assets
+    end
+
+    it 'copies assets from ASSETS_DIR to BUILD_DIR' do
+      expect(FileUtils).to have_received(:cp_r).with(assets_dir, build_dir)
     end
   end
 end

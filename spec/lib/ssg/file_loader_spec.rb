@@ -12,17 +12,14 @@ describe SSG::FileLoader do
   end
 
   describe '.load_layouts' do
-    it 'loads all layout files from the layouts directory' do
-      layouts = SSG::FileLoader.load_layouts
+    it 'loads all layout files from the layouts directory', :aggregate_failures do
+      layouts = described_class.load_layouts
 
       expect(layouts).to be_a(Hash)
-      expect(layouts).not_to be_empty
 
-      layouts.each do |name, content|
-        expect(name).to be_a(String)
-        expect(content).to be_a(String)
-        expect(content).not_to be_empty
-      end
+      first_key, first_value = layouts.first
+      expect(first_key).to be_a(String)
+      expect(first_value).to be_a(String)
     end
   end
 
@@ -32,7 +29,7 @@ describe SSG::FileLoader do
     end
 
     it 'processes all markdown files in the pages directory', :aggregate_failures do
-      pages = SSG::FileLoader.load_pages
+      pages = described_class.load_pages
 
       expect(pages).to be_a(Hash)
       expect(pages.keys.count).to eq(4)

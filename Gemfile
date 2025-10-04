@@ -10,8 +10,9 @@ gem 'commonmarker'
 
 gem 'logger'
 
-gem 'rubocop'
-
 gem 'rspec'
+
+gem 'rubocop'
+gem 'rubocop-rspec', require: false
 
 gem 'pry'

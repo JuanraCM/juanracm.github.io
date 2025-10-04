@@ -100,3 +100,6 @@ RSpec.configure do |config|
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
 end
+
+# Load all lib files for the test suite
+Dir[File.join(__dir__, '..', 'lib', '**', '*.rb')].each { |file| require file }

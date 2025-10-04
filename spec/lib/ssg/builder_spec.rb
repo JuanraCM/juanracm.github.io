@@ -2,8 +2,6 @@
 
 require 'spec_helper'
 
-require_relative '../../lib/builder'
-
 describe SSG::Builder do
   describe '.build' do
     let(:renderer) { instance_double(SSG::PageRenderer) }

@@ -2,8 +2,6 @@
 
 require 'spec_helper'
 
-require_relative '../../lib/markdown_parser'
-
 describe SSG::MarkdownParser do
   describe '.parse' do
     context 'with a valid file' do

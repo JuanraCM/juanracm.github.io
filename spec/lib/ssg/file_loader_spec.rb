@@ -2,9 +2,6 @@
 
 require 'spec_helper'
 
-require_relative '../../lib/file_loader'
-require_relative '../../lib/markdown_parser'
-
 describe SSG::FileLoader do
   before do
     stub_const('SSG::LAYOUTS_DIR', fixture_path('layouts'))

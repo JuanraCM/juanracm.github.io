@@ -2,8 +2,6 @@
 
 require 'spec_helper'
 
-require_relative '../../lib/page_renderer'
-
 describe SSG::PageRenderer do
   subject(:renderer) { described_class.new(layouts) }
 

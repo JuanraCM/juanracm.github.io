@@ -3,7 +3,6 @@
 require 'spec_helper'
 
 require 'fileutils'
-require_relative '../../lib/asset_copier'
 
 describe SSG::AssetCopier do
   let(:assets_dir) { '/tmp/assets' }

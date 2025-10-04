@@ -2,8 +2,6 @@
 
 require 'spec_helper'
 
-require_relative '../../lib/site_config'
-
 describe SSG::SiteConfig do
   describe '.update' do
     let(:pages) do

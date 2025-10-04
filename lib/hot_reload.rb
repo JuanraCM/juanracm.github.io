@@ -30,7 +30,7 @@ module SSG
             setInterval(() => {
               console.info('Checking for updates...');
 
-              fetch('refresh.txt')
+              fetch('/refresh.txt')
                 .then(response => response.text())
                 .then(data => {
                   if (refreshedAt && refreshedAt !== data) {

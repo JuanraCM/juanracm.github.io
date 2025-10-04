@@ -10,6 +10,8 @@
     <div class="container">
       <div class="container__header">
         <div class="container__header__content">
+          <h1 class="container__header__title"><%= meta[:title] %></h1>
+
           <%= content %>
 
           <div class="container__header__social">
@@ -19,6 +21,16 @@
           </div>
         </div>
         <img class="container__header__image" src="<%= meta[:image_url] %>" alt="Juanra">
+      </div>
+
+      <div class="container__body">
+        <% site.posts.each do |post| %>
+          <a href="<%= post[:url] %>" class="container__body__post">
+            <h2><%= post[:title] %></h2>
+            <h3><%= post[:desc] %></h3>
+            <div><%= post[:date].strftime("%B %d, %Y") %></div>
+          </a>
+        <% end %>
       </div>
     </div>
   </body>

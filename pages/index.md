@@ -6,6 +6,4 @@ github_url: https://github.com/JuanraCM
 github_username: JuanraCM
 ---
 
-# Juanra Carretero
-
 Welcome to my blog! Here, I share my thoughts, experiences, and knowledge on programming and technology in general.

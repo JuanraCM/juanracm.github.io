@@ -2,6 +2,7 @@
   --fonts-primary: sans-serif;
   --colors-background: #f4f4f4;
   --colors-text-primary: #11181c;
+  --colors-text-secondary: #687076;
 }
 
 body {
@@ -32,12 +33,40 @@ body {
 
       .container__header__content {
         max-width: 450px;
+
+        p {
+          color: var(--colors-text-secondary);
+        }
       }
 
       .container__header__image {
         border-radius: 100%;
         width: 150px;
         height: auto;
+      }
+    }
+
+    .container__body {
+      margin-top: 65px;
+
+      .container__body__post {
+        text-decoration: none;
+
+        h2 {
+          margin: 0 0 5px 0;
+        }
+
+        h3 {
+          color: var(--colors-text-secondary);
+          font-weight: 500;
+          margin: 0 0 15px 0;
+        }
+
+        div {
+          color: var(--colors-text-secondary);
+          font-weight: 300;
+          margin: 0 0 45px 0;
+        }
       }
     }
   }

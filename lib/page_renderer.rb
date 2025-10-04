@@ -31,12 +31,15 @@ module SSG
 
       template = ERB.new(@layouts[layout_name])
       template_result = template.result_with_hash(
+        site: SiteConfig,
         meta: page_data[:config],
         content: page_data[:content]
       )
       SSG::HotReload.inject_html_snippet(template_result)
 
       output_path = File.join(BUILD_DIR, "#{page_path}.html")
+
+      FileUtils.mkdir_p(File.dirname(output_path))
       File.write(output_path, template_result)
     end
   end

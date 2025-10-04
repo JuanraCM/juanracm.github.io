@@ -4,6 +4,7 @@ require 'fileutils'
 
 require_relative 'config'
 require_relative 'file_loader'
+require_relative 'site_config'
 require_relative 'page_renderer'
 require_relative 'asset_copier'
 require_relative 'event_logger'
@@ -16,6 +17,8 @@ module SSG
 
         layouts = FileLoader.load_layouts
         pages = FileLoader.load_pages
+
+        SiteConfig.update(pages)
 
         renderer = PageRenderer.new(layouts)
         renderer.render_all(pages)

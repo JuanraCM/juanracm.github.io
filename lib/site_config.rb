@@ -14,6 +14,8 @@ module SSG
 
           @posts << page_config.merge(url: "#{path}.html")
         end
+
+        @posts.sort_by! { |post| post[:date] }.reverse!
       end
     end
   end

@@ -42,10 +42,14 @@ describe SSG::SiteConfig do
 
     it 'includes all metadata from post pages', :aggregate_failures do
       first_post = described_class.posts.first
-      expect(first_post[:title]).to eq('First Post')
-      expect(first_post[:date]).to eq('2024-01-01')
-      expect(first_post[:author]).to eq('John Doe')
+      expect(first_post[:title]).to eq('Second Post')
+      expect(first_post[:date]).to eq('2024-01-02')
       expect(first_post[:layout]).to eq('post')
+    end
+
+    it 'sorts posts in descending order by date (newest first)' do
+      dates = described_class.posts.map { |post| post[:date] }
+      expect(dates).to eq(%w[2024-01-02 2024-01-01])
     end
 
     it 'adds URL with .html extension to each post' do

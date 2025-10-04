@@ -24,10 +24,8 @@ module SSG
 
     def render_page(page_path, page_data)
       layout_name = page_data[:config][:layout]
-      raise MissingLayoutError, "Layout not specified for #{page_path}" unless layout_name
-      unless @layouts[layout_name]
-        raise MissingTemplateError, "Layout '#{layout_name}' not found for #{page_path}"
-      end
+      raise_missing_layout_error(page_path) unless layout_name
+      raise_missing_template_error(layout_name, page_path) unless @layouts.key?(layout_name)
 
       template = ERB.new(@layouts[layout_name])
       template_result = template.result_with_hash(
@@ -41,6 +39,14 @@ module SSG
 
       FileUtils.mkdir_p(File.dirname(output_path))
       File.write(output_path, template_result)
+    end
+
+    def raise_missing_layout_error(path)
+      raise MissingLayoutError, "Layout not specified for path: #{path}"
+    end
+
+    def raise_missing_template_error(layout, path)
+      raise MissingTemplateError, "Layout '#{layout}' not found for #{path}"
     end
   end
 end

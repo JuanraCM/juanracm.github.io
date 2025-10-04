@@ -7,33 +7,23 @@ require 'listen'
 
 module SSG
   module HotReload
+    TARGET_DIRECTORIES = [ASSETS_DIR, LAYOUTS_DIR, PAGES_DIR].freeze
     SNIPPET_UPDATE_THRESHOLD = 500
 
     class << self
       def start
         @enabled = true
-        listener = Listen.to(*target_directories) do |modified, added, removed|
-          logger.debug 'Changes detected. Rebuilding site...'
 
-          changed_files = (modified + added + removed).uniq
-          logger.debug "Files changed: #{changed_files.join(', ')}"
-
-          SSG::Builder.prepare_output_dir
-          SSG::Builder.build
-
+        with_changed_files do
+          rebuild_site
           update_refresh_timestamp
-
-          logger.info 'Rebuild complete.'
         end
-
-        logger.info 'Starting file listener...'
-        listener.start
       end
 
       def inject_html_snippet(html)
         return html unless @enabled
 
-        hr_snippet = <<~EOF
+        hr_snippet = <<~HTML
           <script>
             let refreshedAt;
 
@@ -50,19 +40,32 @@ module SSG
                 });
             }, #{SNIPPET_UPDATE_THRESHOLD});
           </script>
-        EOF
+        HTML
 
         html.sub!('</body>', "#{hr_snippet}</body>")
       end
 
       private
 
-      def target_directories
-        [
-          ASSETS_DIR,
-          LAYOUTS_DIR,
-          PAGES_DIR
-        ]
+      def with_changed_files
+        listener = Listen.to(*TARGET_DIRECTORIES) do |modified, added, removed|
+          logger.debug 'Changes detected. Rebuilding site...'
+
+          changed_files = (modified + added + removed).uniq
+          logger.debug "Files changed: #{changed_files.join(', ')}"
+
+          yield
+
+          logger.info 'Rebuild complete.'
+        end
+
+        logger.info 'Starting file listener...'
+        listener.start
+      end
+
+      def rebuild_site
+        SSG::Builder.prepare_output_dir
+        SSG::Builder.build
       end
 
       def update_refresh_timestamp

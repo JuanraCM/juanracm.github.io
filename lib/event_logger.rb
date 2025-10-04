@@ -4,7 +4,7 @@ require 'logger'
 
 module SSG
   class EventLogger
-    LOG_OUTPUT = STDOUT
+    LOG_OUTPUT = $stdout
 
     GREEN = "\e[32m"
     YELLOW = "\e[33m"

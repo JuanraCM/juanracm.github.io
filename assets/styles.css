@@ -100,7 +100,7 @@ body {
 .page--home {
   .header {
     .header__content {
-      max-width: 450px;
+      padding-right: var(--space-lg);
 
       .header__title {
         margin: 0 0 var(--space-xs) 0;
@@ -110,6 +110,13 @@ body {
         font-size: var(--font-size-5);
         font-weight: 500;
         color: var(--colors-text-secondary);
+      }
+    }
+
+    .header__social {
+      a {
+        font-size: var(--font-size-5);
+        font-weight: 800;
       }
     }
 

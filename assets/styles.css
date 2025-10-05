@@ -1,5 +1,19 @@
+@font-face {
+  font-family: 'Karla';
+  src: url('fonts/Karla-VariableFont_wght.ttf') format('truetype');
+  font-weight: 200 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Karla';
+  src: url('fonts/Karla-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 200 800;
+  font-style: italic;
+}
+
 :root {
-  --fonts-primary: sans-serif;
+  --fonts-primary: 'Karla', sans-serif;
   --fonts-code: 'Fira Code', monospace;
   --colors-background: #f4f4f4;
   --colors-text-primary: #11181c;

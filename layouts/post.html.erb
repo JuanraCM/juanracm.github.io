@@ -7,17 +7,30 @@
     <link href="/assets/styles.css" rel="stylesheet">
   </head>
   <body class="page page--post">
-    <header class="header">
-      <div class="header__content">
-        <a href="/" class="header__backlink">← Back to home</a>
-        <h1 class="header__title"><%= meta[:title] %></h1>
-        <p class="header__summary"><%= meta[:desc] %></p>
-        <div class="header__date"><%= meta[:date].strftime("%B %d, %Y") %></div>
-      </div>
-    </header>
+    <div class="post-container">
+      <header class="header">
+        <div class="header__content">
+          <a href="/" class="header__backlink">← Back to home</a>
+          <h1 class="header__title"><%= meta[:title] %></h1>
+          <p class="header__summary"><%= meta[:desc] %></p>
+          <div class="header__date"><%= meta[:date].strftime("%B %d, %Y") %></div>
+        </div>
+      </header>
 
-    <main class="post-content">
-      <%= content %>
-    </main>
+      <main class="post-content">
+        <%= content %>
+      </main>
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar__content">
+        <img src="https://avatars.githubusercontent.com/u/44867213" alt="Juanra" class="sidebar__image">
+        <div class="sidebar__author">Juanra Carretero</div>
+        <div class="sidebar__bio">A passionate developer and writer sharing insights on technology and programming.</div>
+        <div class="sidebar__social">
+          <a href="https://github.com/JuanraCM">GitHub</a>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

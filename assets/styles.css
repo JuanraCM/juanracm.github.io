@@ -131,7 +131,7 @@ body {
         margin: 0 0 var(--space-1) 0;
       }
 
-      p {
+      .header__bio {
         font-size: var(--font-size-5);
         font-weight: 500;
         color: var(--colors-text-secondary);

@@ -10,17 +10,17 @@
     <div class="main-content">
       <header class="header">
         <div class="header__content">
-          <h1 class="header__title"><%= meta[:title] %></h1>
+          <h1 class="header__title"><%= site.author[:name] %></h1>
 
-          <%= content %>
+          <h3 class="header__bio"><%= site.bio[:long_version] %></h2>
 
           <div class="header__social">
-            <a href="<%= meta[:github_url] %>" target="_blank">
+            <a href="<%= site.author[:github_url] %>" target="_blank">
               GitHub
             </a>
           </div>
         </div>
-        <img class="header__image" src="<%= meta[:image_url] %>" alt="Juanra">
+        <img class="header__image" src="<%= site.author[:image_url] %>" alt="Juanra">
       </header>
 
       <main class="posts-list">

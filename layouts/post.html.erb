@@ -24,11 +24,11 @@
 
     <div class="sidebar">
       <div class="sidebar__content">
-        <img src="https://avatars.githubusercontent.com/u/44867213" alt="Juanra" class="sidebar__image">
-        <div class="sidebar__author">Juanra Carretero</div>
-        <div class="sidebar__bio">A passionate developer and writer sharing insights on technology and programming.</div>
+        <img src="<%= site.author[:image_url] %>" alt="<%= site.author[:short_name] %>" class="sidebar__image">
+        <div class="sidebar__author"><%= site.author[:name] %></div>
+        <div class="sidebar__bio"><%= site.bio[:short_version] %></div>
         <div class="sidebar__social">
-          <a href="https://github.com/JuanraCM">GitHub</a>
+          <a href="<%= site.author[:github_url] %>">GitHub</a>
         </div>
       </div>
     </div>

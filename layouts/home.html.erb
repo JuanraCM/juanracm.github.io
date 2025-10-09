@@ -7,29 +7,31 @@
     <link href="/assets/styles.css" rel="stylesheet">
   </head>
   <body class="page page--home">
-    <header class="header">
-      <div class="header__content">
-        <h1 class="header__title"><%= meta[:title] %></h1>
+    <div class="main-content">
+      <header class="header">
+        <div class="header__content">
+          <h1 class="header__title"><%= meta[:title] %></h1>
 
-        <%= content %>
+          <%= content %>
 
-        <div class="header__social">
-          <a href="<%= meta[:github_url] %>" target="_blank">
-            GitHub
-          </a>
+          <div class="header__social">
+            <a href="<%= meta[:github_url] %>" target="_blank">
+              GitHub
+            </a>
+          </div>
         </div>
-      </div>
-      <img class="header__image" src="<%= meta[:image_url] %>" alt="Juanra">
-    </header>
+        <img class="header__image" src="<%= meta[:image_url] %>" alt="Juanra">
+      </header>
 
-    <main class="posts-list">
-      <% site.posts.each do |post| %>
-        <a href="<%= post[:url] %>" class="post-item">
-          <h2 class="post-item__title"><%= post[:title] %></h2>
-          <h3 class="post-item__summary"><%= post[:desc] %></h3>
-          <div class="post-item__date"><%= post[:date].strftime("%B %d, %Y") %></div>
-        </a>
-      <% end %>
-    </main>
+      <main class="posts-list">
+        <% site.posts.each do |post| %>
+          <a href="<%= post[:url] %>" class="post-item">
+            <h2 class="post-item__title"><%= post[:title] %></h2>
+            <h3 class="post-item__summary"><%= post[:desc] %></h3>
+            <div class="post-item__date"><%= post[:date].strftime("%B %d, %Y") %></div>
+          </a>
+        <% end %>
+      </main>
+    </div>
   </body>
 </html>

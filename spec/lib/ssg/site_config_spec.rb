@@ -31,7 +31,12 @@ describe SSG::SiteConfig do
     end
 
     before do
+      stub_const('SSG::SiteConfig::SITE_CONFIG_FILE', fixture_path('site.yml'))
+
       described_class.instance_variable_set(:@posts, nil)
+      described_class.instance_variable_set(:@author, nil)
+      described_class.instance_variable_set(:@bio, nil)
+
       described_class.update(pages)
     end
 
@@ -60,6 +65,14 @@ describe SSG::SiteConfig do
     it 'excludes pages that are not posts' do
       post_titles = described_class.posts.map { |post| post[:title] }
       expect(post_titles).not_to include('About')
+    end
+
+    it 'includes author and bio from site config file', :aggregate_failures do
+      expect(described_class.author).to be_a(Hash)
+      expect(described_class.author[:name]).to eq('Foo Bar')
+
+      expect(described_class.bio).to be_a(Hash)
+      expect(described_class.bio[:short_version]).to eq('Lorem ipsum')
     end
   end
 end

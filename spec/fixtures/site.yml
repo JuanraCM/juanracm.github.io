@@ -1,0 +1,9 @@
+author:
+  name: "Foo Bar"
+  short_name: "Foo"
+  image_url: "https://example.com/images/foo.jpg"
+  github_url: "https://github.com/foobar"
+
+bio:
+  long_version: "Lorem ipsum dolor sit amet"
+  short_version: "Lorem ipsum"

@@ -1,11 +1,30 @@
 # frozen_string_literal: true
 
+require 'yaml'
+
 module SSG
   module SiteConfig
+    SITE_CONFIG_FILE = File.join(ROOT_DIR, 'site.yml').freeze
+
     class << self
-      attr_reader :posts, :site_title, :site_description
+      attr_reader :posts, :author, :bio
+
 
       def update(pages)
+        load_site_config
+        load_posts(pages)
+      end
+
+      private
+
+      def load_site_config
+        config = YAML.load_file(SITE_CONFIG_FILE, symbolize_names: true)
+
+        @author = config[:author]
+        @bio = config[:bio]
+      end
+
+      def load_posts(pages)
         @posts = []
 
         pages.each do |path, meta|

@@ -28,7 +28,11 @@
           <a href="<%= post[:url] %>" class="post-item">
             <h2 class="post-item__title"><%= post[:title] %></h2>
             <h3 class="post-item__summary"><%= post[:desc] %></h3>
-            <div class="post-item__date"><%= post[:date].strftime("%B %d, %Y") %></div>
+            <div class="post-info">
+              <div class="post-info__date"><%= post[:date].strftime("%B %d, %Y") %></div>
+              <div class="post-info__separator"></div>
+              <div class="post-info__readtime"><%= post[:reading_time] %></div>
+            </div>
           </a>
         <% end %>
       </main>

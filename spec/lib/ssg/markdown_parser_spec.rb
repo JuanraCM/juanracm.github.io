@@ -12,7 +12,7 @@ describe SSG::MarkdownParser do
 
         expect(page_data).to be_a(Hash)
         expect(page_data[:config][:title]).to eq('Test File')
-        expect(page_data[:config][:layout]).to eq('default')
+        expect(page_data[:config][:reading_time]).to eq('1 minute read')
         expect(page_data[:content]).to include('<strong>bold text</strong>')
       end
     end

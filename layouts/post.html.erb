@@ -13,7 +13,11 @@
           <a href="/" class="header__backlink">← Back to home</a>
           <h1 class="header__title"><%= meta[:title] %></h1>
           <p class="header__summary"><%= meta[:desc] %></p>
-          <div class="header__date"><%= meta[:date].strftime("%B %d, %Y") %></div>
+          <div class="post-info">
+            <div class="post-info__date"><%= meta[:date].strftime("%B %d, %Y") %></div>
+            <div class="post-info__separator"></div>
+            <div class="post-info__readtime"><%= meta[:reading_time] %></div>
+          </div>
         </div>
       </header>
 

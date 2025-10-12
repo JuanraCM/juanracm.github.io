@@ -1,4 +1,4 @@
 ---
-title: Juanra Carretero | Software Engineer
+title: Juanra Carretero | Software Developer
 layout: home
 ---

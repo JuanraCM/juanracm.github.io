@@ -71,7 +71,7 @@ describe SSG::PageRenderer do
       it 'raises MissingTemplateError when layout template is not found' do
         expect do
           renderer.render_all(pages)
-        end.to raise_error(SSG::PageRenderer::MissingTemplateError, /Layout 'nonexistent' not found/)
+        end.to raise_error(SSG::PageRenderer::InvalidLayoutError, /Layout 'nonexistent' not found/)
       end
     end
   end

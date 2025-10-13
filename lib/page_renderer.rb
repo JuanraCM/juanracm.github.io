@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'erb'
-
 require_relative 'config'
 require_relative 'hot_reload'
+require_relative 'view_context'
 
 module SSG
   class PageRenderer
@@ -27,18 +26,13 @@ module SSG
       raise_missing_layout_error(page_path) unless layout_name
       raise_missing_template_error(layout_name, page_path) unless @layouts.key?(layout_name)
 
-      template = ERB.new(@layouts[layout_name])
-      template_result = template.result_with_hash(
-        site: SiteConfig,
-        meta: page_data[:config],
-        content: page_data[:content]
-      )
-      SSG::HotReload.inject_html_snippet(template_result)
+      rendered_page = ViewContext.new(@layouts, page_data).render
+      HotReload.inject_html_snippet(rendered_page)
 
       output_path = File.join(BUILD_DIR, "#{page_path}.html")
 
       FileUtils.mkdir_p(File.dirname(output_path))
-      File.write(output_path, template_result)
+      File.write(output_path, rendered_page)
     end
 
     def raise_missing_layout_error(path)

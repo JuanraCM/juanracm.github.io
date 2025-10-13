@@ -1,41 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%=  meta[:title] %></title>
-    <link href="/assets/styles.css" rel="stylesheet">
-  </head>
-  <body class="page page--home">
-    <div class="main-content">
-      <header class="header">
-        <div class="header__content">
-          <h1 class="header__title"><%= site.author[:name] %></h1>
-
-          <h3 class="header__bio"><%= site.bio[:long_version] %></h2>
-
-          <div class="header__social">
-            <a href="<%= site.author[:github_url] %>" target="_blank">
-              GitHub
-            </a>
-          </div>
-        </div>
-        <img class="header__image" src="<%= site.author[:image_url] %>" alt="Juanra">
-      </header>
-
-      <main class="posts-list">
-        <% site.posts.each do |post| %>
-          <a href="<%= post[:url] %>" class="post-item">
-            <h2 class="post-item__title"><%= post[:title] %></h2>
-            <h3 class="post-item__summary"><%= post[:desc] %></h3>
-            <div class="post-info">
-              <div class="post-info__date"><%= post[:date].strftime("%B %d, %Y") %></div>
-              <div class="post-info__separator"></div>
-              <div class="post-info__readtime"><%= post[:reading_time] %></div>
-            </div>
+<% layout 'default', page_class: 'page--home' do %>
+  <div class="main-content">
+    <header class="header">
+      <div class="header__content">
+        <h1 class="header__title"><%= site.author[:name] %></h1>
+        <h3 class="header__bio"><%= site.bio[:long_version] %></h3>
+        <div class="header__social">
+          <a href="<%= site.author[:github_url] %>" target="_blank">
+            GitHub
           </a>
-        <% end %>
-      </main>
-    </div>
-  </body>
-</html>
+        </div>
+      </div>
+      <img class="header__image" src="<%= site.author[:image_url] %>" alt="Juanra">
+    </header>
+
+    <main class="posts-list">
+      <% site.posts.each do |post| %>
+        <a href="<%= post[:url] %>" class="post-item">
+          <h2 class="post-item__title"><%= post[:title] %></h2>
+          <h3 class="post-item__summary"><%= post[:desc] %></h3>
+          <div class="post-info">
+            <div class="post-info__date"><%= post[:date].strftime("%B %d, %Y") %></div>
+            <div class="post-info__separator"></div>
+            <div class="post-info__readtime"><%= post[:reading_time] %></div>
+          </div>
+        </a>
+      <% end %>
+    </main>
+  </div>
+<% end %>

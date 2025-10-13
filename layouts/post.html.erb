@@ -1,40 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= meta[:title] %></title>
-    <link href="/assets/styles.css" rel="stylesheet">
-  </head>
-  <body class="page page--post">
-    <div class="main-content">
-      <header class="header">
-        <div class="header__content">
-          <a href="/" class="header__backlink">← Back to home</a>
-          <h1 class="header__title"><%= meta[:title] %></h1>
-          <p class="header__summary"><%= meta[:desc] %></p>
-          <div class="post-info">
-            <div class="post-info__date"><%= meta[:date].strftime("%B %d, %Y") %></div>
-            <div class="post-info__separator"></div>
-            <div class="post-info__readtime"><%= meta[:reading_time] %></div>
-          </div>
-        </div>
-      </header>
-
-      <main class="post-content">
-        <%= content %>
-      </main>
-    </div>
-
-    <div class="sidebar">
-      <div class="sidebar__content">
-        <img src="<%= site.author[:image_url] %>" alt="<%= site.author[:short_name] %>" class="sidebar__image">
-        <div class="sidebar__author"><%= site.author[:name] %></div>
-        <div class="sidebar__bio"><%= site.bio[:short_version] %></div>
-        <div class="sidebar__social">
-          <a href="<%= site.author[:github_url] %>">GitHub</a>
+<% layout 'default', page_class: 'page--post' do %>
+  <div class="main-content">
+    <header class="header">
+      <div class="header__content">
+        <a href="/" class="header__backlink">← Back to home</a>
+        <h1 class="header__title"><%= meta[:title] %></h1>
+        <p class="header__summary"><%= meta[:desc] %></p>
+        <div class="post-info">
+          <div class="post-info__date"><%= meta[:date].strftime("%B %d, %Y") %></div>
+          <div class="post-info__separator"></div>
+          <div class="post-info__readtime"><%= meta[:reading_time] %></div>
         </div>
       </div>
+    </header>
+
+    <main class="post-content">
+      <%= content %>
+    </main>
+  </div>
+
+  <div class="sidebar">
+    <div class="sidebar__content">
+      <img src="<%= site.author[:image_url] %>" alt="<%= site.author[:short_name] %>" class="sidebar__image">
+      <div class="sidebar__author"><%= site.author[:name] %></div>
+      <div class="sidebar__bio"><%= site.bio[:short_version] %></div>
+      <div class="sidebar__social">
+        <a href="<%= site.author[:github_url] %>">GitHub</a>
+      </div>
     </div>
-  </body>
-</html>
+  </div>
+<% end %>

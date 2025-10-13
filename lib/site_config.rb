@@ -9,7 +9,6 @@ module SSG
     class << self
       attr_reader :posts, :author, :bio
 
-
       def update(pages)
         load_site_config
         load_posts(pages)

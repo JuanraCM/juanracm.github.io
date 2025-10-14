@@ -52,5 +52,15 @@ describe SSG::ViewContext do
         expect(rendered_output).to include('<p>This is a test page</p>')
       end
     end
+
+    context 'when an invalid layout key is provided' do
+      before do
+        page_data[:config][:layout] = 'nonexistent_layout'
+      end
+
+      it 'raises an InvalidLayoutError' do
+        expect { rendered_output }.to raise_error(SSG::ViewContext::InvalidLayoutError)
+      end
+    end
   end
 end

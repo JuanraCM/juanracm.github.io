@@ -7,6 +7,8 @@ require_relative 'site_config'
 
 module SSG
   class ViewContext
+    class InvalidLayoutError < SSGError; end
+
     attr_reader :meta, :content
 
     def initialize(layouts, page_data)
@@ -29,7 +31,10 @@ module SSG
     end
 
     def render_template(template_name)
-      template = ERB.new(@layouts[template_name])
+      layout = @layouts[template_name]
+      raise InvalidLayoutError, "Layout '#{template_name}' not found" unless layout
+
+      template = ERB.new(layout)
       template.result(binding)
     end
 

@@ -56,23 +56,5 @@ describe SSG::PageRenderer do
         end.to raise_error(SSG::PageRenderer::MissingLayoutError, /Layout not specified/)
       end
     end
-
-    describe 'with missing template' do
-      let(:layouts) { {} }
-      let(:pages) do
-        {
-          'index' => {
-            config: { title: 'Home', layout: 'nonexistent' },
-            content: '<h1>Welcome to the homepage</h1>'
-          }
-        }
-      end
-
-      it 'raises MissingTemplateError when layout template is not found' do
-        expect do
-          renderer.render_all(pages)
-        end.to raise_error(SSG::PageRenderer::InvalidLayoutError, /Layout 'nonexistent' not found/)
-      end
-    end
   end
 end

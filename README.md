@@ -9,7 +9,7 @@ This blog was built using a custom static site generator written in Ruby. The so
 To run the static site generator locally, you need to have Ruby installed on your machine. You can then clone this repository and install the required gems:
 
 ```sh
-cd personal_blog && bundle install
+cd juanracm.github.io && bundle install
 ```
 
 ## Usage

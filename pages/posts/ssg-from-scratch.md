@@ -31,10 +31,10 @@ Dir.glob("pages/*.md").each do |file|
   page_content = File.read(file)
   layout_template = ERB.new(File.read("layouts/post.html.erb"))
 
-  html_content = CommonMarker.to_html(page_content)
+  html_content = Commonmarker.to_html(page_content)
   output = layout_template.result(content: html_content)
 
-  File.write("dist/#{File.basename(file, '.md')}.html", output)
+  File.write("build/#{File.basename(file, '.md')}.html", output)
 end
 ```
 
@@ -66,4 +66,4 @@ Finally, I worked on the design and layout of the blog. I was heavily inspired b
 
 Building this project was a very fun and rewarding experience. It allowed me to understand how static site generators work under the hood, and I now have a tool that perfectly fits my needs. Maybe in the future I'll isolate the SSG into its own gem and share it with the world, who knows?
 
-If you're interested in the code, you can check out the [repository on GitHub](https://github.com/JuanraCM/personal_blog). Feel free to reach out if you have any questions or suggestions!
+If you're interested in the code, you can check out the [repository on GitHub](https://github.com/JuanraCM/juanracm.github.io). Feel free to reach out if you have any questions or suggestions!

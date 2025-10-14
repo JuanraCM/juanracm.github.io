@@ -3,9 +3,7 @@
   <head>
     <title><%=  meta[:title] %></title>
   </head>
-  <body>
-    <h1>This is the default layout</h1>
-
-    <%= content %>
+  <body class="<%= page_class %>">
+    <%= yield %>
   </body>
 </html>

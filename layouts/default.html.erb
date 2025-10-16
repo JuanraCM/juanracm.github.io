@@ -7,6 +7,10 @@
     <link href="/assets/styles.css" rel="stylesheet">
   </head>
   <body class="page <%= page_class %>">
-    <%= yield %>
+    <div class="main-content">
+      <%= yield_content :main %>
+    </div>
+
+    <%= yield_content %>
   </body>
 </html>

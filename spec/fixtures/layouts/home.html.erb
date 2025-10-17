@@ -1,5 +1,13 @@
-<% layout 'base' do %>
+<% layout 'base', page_class: 'page--home' do %>
   <h1>Welcome to Our Website</h1>
 
   <%= content %>
+
+  <% yield_content :footer do %>
+    This is the footer content.
+  <% end %>
+
+  <% yield_content :main do %>
+    This is the main container content.
+  <% end %>
 <% end %>

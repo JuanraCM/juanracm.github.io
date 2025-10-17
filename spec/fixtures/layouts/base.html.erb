@@ -4,6 +4,15 @@
     <title><%=  meta[:title] %></title>
   </head>
   <body class="<%= page_class %>">
-    <%= yield %>
+
+    <div class="main-container">
+      <%= yield_content :main %>
+    </div>
+
+    <%= yield_content %>
+
+    <footer>
+      <%= yield_content :footer %>
+    </footer>
   </body>
 </html>

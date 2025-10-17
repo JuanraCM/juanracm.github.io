@@ -25,17 +25,31 @@ describe SSG::ViewContext do
   describe '#render' do
     subject(:rendered_output) { view_context.render }
 
+    let(:page) { Capybara::Node::Simple.new(rendered_output) }
+
     context 'when a parent layout is specified' do
       it 'includes content from the parent layout' do
-        expect(rendered_output).to include('<title>Test Page</title>')
+        expect(page).to have_title('Test Page')
       end
 
       it 'includes content from the page layout' do
-        expect(rendered_output).to include('<h1>Welcome to Our Website</h1>')
+        expect(page).to have_css('h1', text: 'Welcome to Our Website')
       end
 
       it 'includes page content' do
-        expect(rendered_output).to include('<p>This is a test page</p>')
+        expect(page).to have_css('p', text: 'This is a test page')
+      end
+
+      it 'includes the page class in the body tag' do
+        expect(page).to have_css('body.page--home')
+      end
+
+      it 'includes page content for the main container' do
+        expect(page).to have_css('.main-container', text: 'This is the main container content.')
+      end
+
+      it 'includes footer content from the footer' do
+        expect(page).to have_css('footer', text: 'This is the footer content.')
       end
     end
 
@@ -45,11 +59,11 @@ describe SSG::ViewContext do
       end
 
       it 'includes content from the page layout' do
-        expect(rendered_output).to include('<h1>This is the default layout</h1>')
+        expect(page).to have_css('h1', text: 'This is the default layout')
       end
 
       it 'includes page content' do
-        expect(rendered_output).to include('<p>This is a test page</p>')
+        expect(page).to have_css('p', text: 'This is a test page')
       end
     end
 

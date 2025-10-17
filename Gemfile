@@ -15,8 +15,8 @@ gem 'commonmarker'
 gem 'logger'
 
 # Testing
-gem 'rspec'
 gem 'capybara'
+gem 'rspec'
 
 # Linting
 gem 'rubocop'

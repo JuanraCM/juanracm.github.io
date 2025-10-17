@@ -2,17 +2,25 @@
 
 source 'https://rubygems.org'
 
+# Dev server
 gem 'webrick'
 
+# File watching
 gem 'listen'
 
+# Markdown processing
 gem 'commonmarker'
 
+# Logging
 gem 'logger'
 
+# Testing
 gem 'rspec'
+gem 'capybara'
 
+# Linting
 gem 'rubocop'
 gem 'rubocop-rspec', require: false
 
+# Debugging
 gem 'pry'

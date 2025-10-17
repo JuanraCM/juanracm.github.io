@@ -20,6 +20,7 @@ gem 'rspec'
 
 # Linting
 gem 'rubocop'
+gem 'rubocop-capybara', require: false
 gem 'rubocop-rspec', require: false
 
 # Debugging

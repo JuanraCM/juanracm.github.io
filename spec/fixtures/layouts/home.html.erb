@@ -1,6 +1,8 @@
 <% layout 'base', page_class: 'page--home' do %>
   <h1>Welcome to Our Website</h1>
 
+  <%= inline_svg 'icon', class_name: 'site-logo' %>
+
   <%= content %>
 
   <% yield_content :footer do %>

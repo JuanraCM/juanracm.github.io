@@ -6,6 +6,7 @@ describe SSG::FileLoader do
   before do
     stub_const('SSG::LAYOUTS_DIR', fixture_path('layouts'))
     stub_const('SSG::PAGES_DIR', fixture_path('pages'))
+    stub_const('SSG::ASSETS_DIR', fixture_path('assets'))
   end
 
   describe '.load_layouts' do
@@ -30,6 +31,29 @@ describe SSG::FileLoader do
 
       expect(pages).to be_a(Hash)
       expect(pages.keys.count).to eq(4)
+    end
+  end
+
+  describe '.load_asset' do
+    before do
+      stub_const('SSG::ASSETS_DIR', fixture_path('assets'))
+    end
+
+    context 'when the asset exists' do
+      it 'loads the asset file content' do
+        content = described_class.load_asset('icon.svg')
+
+        expect(content).to be_a(String)
+        expect(content).to include('<svg')
+      end
+    end
+
+    context 'when the asset does not exist' do
+      it 'raises AssetNotFoundError' do
+        expect {
+          described_class.load_asset('unknown_icon.png')
+        }.to raise_error(SSG::FileLoader::AssetNotFoundError, /Asset 'unknown_icon.png' not found/)
+      end
     end
   end
 end

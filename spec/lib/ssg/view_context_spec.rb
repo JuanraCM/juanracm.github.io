@@ -22,6 +22,10 @@ describe SSG::ViewContext do
     }
   end
 
+  before do
+    stub_const('SSG::ASSETS_DIR', fixture_path('assets'))
+  end
+
   describe '#render' do
     subject(:rendered_output) { view_context.render }
 
@@ -50,6 +54,10 @@ describe SSG::ViewContext do
 
       it 'includes footer content from the footer' do
         expect(page).to have_css('footer', text: 'This is the footer content.')
+      end
+
+      it 'includes an inline svg asset' do
+        expect(page).to have_css('svg.site-logo')
       end
     end
 

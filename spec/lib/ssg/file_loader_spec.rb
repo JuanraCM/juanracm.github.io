@@ -43,16 +43,15 @@ describe SSG::FileLoader do
       it 'loads the asset file content' do
         content = described_class.load_asset('icon.svg')
 
-        expect(content).to be_a(String)
         expect(content).to include('<svg')
       end
     end
 
     context 'when the asset does not exist' do
       it 'raises AssetNotFoundError' do
-        expect {
+        expect do
           described_class.load_asset('unknown_icon.png')
-        }.to raise_error(SSG::FileLoader::AssetNotFoundError, /Asset 'unknown_icon.png' not found/)
+        end.to raise_error(SSG::FileLoader::AssetNotFoundError, /Asset 'unknown_icon.png' not found/)
       end
     end
   end

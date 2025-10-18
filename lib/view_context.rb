@@ -4,6 +4,7 @@ require 'erb'
 
 require_relative 'config'
 require_relative 'site_config'
+require_relative 'file_loader'
 
 module SSG
   class ViewContext
@@ -38,6 +39,13 @@ module SSG
       else
         @_render_blocks[name]
       end
+    end
+
+    def inline_svg(path, class_name: nil)
+      svg_content = FileLoader.load_asset("#{path}.svg")
+
+      svg_content.gsub!('<svg', "<svg class=\"#{class_name}\"") if class_name
+      svg_content
     end
 
     def render_template(template_name, &block)

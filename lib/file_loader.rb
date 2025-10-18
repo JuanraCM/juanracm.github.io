@@ -5,6 +5,8 @@ require_relative 'markdown_parser'
 
 module SSG
   class FileLoader
+    class AssetNotFoundError < SSGError; end
+
     def self.load_layouts
       layouts = {}
 
@@ -25,6 +27,16 @@ module SSG
       end
 
       pages
+    end
+
+    def self.load_asset(path)
+      full_path = File.join(ASSETS_DIR, path)
+
+      if File.exist?(full_path) && File.file?(full_path)
+        File.read(full_path)
+      else
+        raise AssetNotFoundError, "Asset '#{path}' not found"
+      end
     end
   end
 end

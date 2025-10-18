@@ -53,15 +53,12 @@
   --colors-separator: #30363d;
   --colors-sidebar-border: #21262d;
 
-  .navbar {
-    .navbar__mode {
-      .mode-light {
-        display: block;
-      }
-
-      .mode-dark {
-        display: none;
-      }
+  .mode {
+    .mode__light-toggle {
+      display: block;
+    }
+    .mode__dark-toggle {
+      display: none;
     }
   }
 }
@@ -146,16 +143,17 @@ body {
     height: 30px;
     fill: var(--colors-text-primary);
   }
+}
 
-  .navbar__mode {
-    .mode-light {
-      display: none;
-    }
-    .mode-dark {
-      display: block;
-    }
+.mode {
+  .mode__light-toggle {
+    display: none;
+  }
+  .mode__dark-toggle {
+    display: block;
   }
 }
+
 
 .main-content {
   width: 100%;

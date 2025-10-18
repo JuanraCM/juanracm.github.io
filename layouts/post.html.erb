@@ -1,5 +1,5 @@
 <% layout 'default', page_class: 'page--post' do %>
-  <div class="main-content">
+  <% yield_content :main do %>
     <header class="header">
       <div class="header__content">
         <a href="/" class="header__backlink">← Back to home</a>
@@ -16,7 +16,7 @@
     <main class="post-content">
       <%= content %>
     </main>
-  </div>
+  <% end %>
 
   <div class="sidebar">
     <div class="sidebar__content">

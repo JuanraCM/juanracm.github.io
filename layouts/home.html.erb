@@ -1,5 +1,5 @@
 <% layout 'default', page_class: 'page--home' do %>
-  <div class="main-content">
+  <% yield_content :main do %>
     <header class="header">
       <div class="header__content">
         <h1 class="header__title"><%= site.author[:name] %></h1>
@@ -26,5 +26,5 @@
         </a>
       <% end %>
     </main>
-  </div>
+  <% end %>
 <% end %>

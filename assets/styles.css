@@ -44,6 +44,28 @@
   --space-7: 65px;
 }
 
+[data-theme="dark"] {
+  --colors-background: #0d1117;
+  --colors-code-text: #c9d1d9;
+  --colors-text-primary: #c9d1d9;
+  --colors-text-secondary: #8b949e;
+  --colors-text-anchor: #58a6ff;
+  --colors-separator: #30363d;
+  --colors-sidebar-border: #21262d;
+
+  .navbar {
+    .navbar__mode {
+      .mode-light {
+        display: block;
+      }
+
+      .mode-dark {
+        display: none;
+      }
+    }
+  }
+}
+
 body {
   background-color: var(--colors-background);
   font-family: var(--fonts-primary);
@@ -112,16 +134,35 @@ body {
   min-height: 100vh;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--colors-sidebar-border);
+  padding: var(--space-3);
+  margin-bottom: var(--space-6);
+
+  .navbar__icon {
+    width: 30px;
+    height: 30px;
+    fill: var(--colors-text-primary);
+  }
+
+  .navbar__mode {
+    .mode-light {
+      display: none;
+    }
+    .mode-dark {
+      display: block;
+    }
+  }
+}
+
 .main-content {
   width: 100%;
   max-width: 740px;
-  margin: var(--space-5) auto;
+  margin: 0 auto var(--space-3) auto;
   padding: 0 var(--space-5);
   flex-grow: 1;
-
-  @media (min-width: 640px) {
-    margin: var(--space-6) auto;
-  }
 }
 
 .header {
@@ -152,6 +193,7 @@ body {
       .header__title {
         font-size: var(--font-size-9);
         margin: 0 0 var(--space-1) 0;
+        color: var(--colors-text-primary);
       }
 
       .header__bio {
@@ -217,6 +259,7 @@ body {
 
       .header__title {
         margin: 0 0 var(--space-1) 0;
+        color: var(--colors-text-primary);
       }
 
       .header__summary {

@@ -347,6 +347,7 @@ body {
       }
 
       .sidebar__author {
+        color: var(--colors-text-primary);
         font-size: var(--font-size-6);
         font-weight: 600;
         margin-bottom: var(--space-2);

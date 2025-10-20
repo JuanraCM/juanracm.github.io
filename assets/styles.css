@@ -135,7 +135,7 @@ body {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid var(--colors-sidebar-border);
-  padding: var(--space-3);
+  padding: var(--space-2);
   margin-bottom: var(--space-6);
 
   .navbar__icon {

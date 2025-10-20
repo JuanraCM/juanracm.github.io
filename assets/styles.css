@@ -45,13 +45,13 @@
 }
 
 [data-theme="dark"] {
-  --colors-background: #0d1117;
+  --colors-background: #1c1c1c;
   --colors-code-text: #c9d1d9;
-  --colors-text-primary: #c9d1d9;
-  --colors-text-secondary: #8b949e;
-  --colors-text-anchor: #58a6ff;
-  --colors-separator: #30363d;
-  --colors-sidebar-border: #21262d;
+  --colors-text-primary: #e0e0e0;
+  --colors-text-secondary: #b0b0b0;
+  --colors-text-anchor: #a8dadc;
+  --colors-separator: #444444;
+  --colors-sidebar-border: #444444;
 
   .mode {
     .mode__light-toggle {

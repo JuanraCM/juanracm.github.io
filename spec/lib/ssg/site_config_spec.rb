@@ -31,8 +31,6 @@ describe SSG::SiteConfig do
     end
 
     before do
-      stub_const('SSG::SiteConfig::SITE_CONFIG_FILE', fixture_path('site.yml'))
-
       described_class.instance_variable_set(:@posts, nil)
       described_class.instance_variable_set(:@author, nil)
       described_class.instance_variable_set(:@bio, nil)

@@ -5,13 +5,8 @@ require 'spec_helper'
 require 'fileutils'
 
 describe SSG::AssetCopier do
-  let(:assets_dir) { '/tmp/assets' }
-  let(:build_dir) { '/tmp/build' }
-
-  before do
-    stub_const('SSG::ASSETS_DIR', assets_dir)
-    stub_const('SSG::BUILD_DIR', build_dir)
-  end
+  let(:assets_dir) { fixture_path('assets') }
+  let(:build_dir) { fixture_path('build') }
 
   describe '.copy_assets' do
     before do

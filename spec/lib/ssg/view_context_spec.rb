@@ -51,6 +51,10 @@ describe SSG::ViewContext do
       it 'includes footer content from the footer' do
         expect(page).to have_css('footer', text: 'This is the footer content.')
       end
+
+      it 'includes an inline svg asset' do
+        expect(page).to have_css('svg.site-logo')
+      end
     end
 
     context 'when a parent layout is not specified' do

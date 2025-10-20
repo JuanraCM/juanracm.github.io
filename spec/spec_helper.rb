@@ -22,9 +22,16 @@ require_relative 'helper_methods'
 RSpec.configure do |config|
   config.include HelperMethods
 
-  # Suppress EventLogger output during tests
   config.before do
+    # Suppress EventLogger output during tests
     stub_const('SSG::EventLogger::LOG_OUTPUT', File::NULL)
+
+    # Stub SSG constants to redirect file operations to the spec fixtures
+    stub_const('SSG::LAYOUTS_DIR', fixture_path('layouts'))
+    stub_const('SSG::PAGES_DIR', fixture_path('pages'))
+    stub_const('SSG::ASSETS_DIR', fixture_path('assets'))
+    stub_const('SSG::BUILD_DIR', fixture_path('build'))
+    stub_const('SSG::SiteConfig::SITE_CONFIG_FILE', fixture_path('site.yml'))
   end
 
   # rspec-expectations config goes here. You can use an alternate

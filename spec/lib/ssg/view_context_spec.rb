@@ -22,10 +22,6 @@ describe SSG::ViewContext do
     }
   end
 
-  before do
-    stub_const('SSG::ASSETS_DIR', fixture_path('assets'))
-  end
-
   describe '#render' do
     subject(:rendered_output) { view_context.render }
 

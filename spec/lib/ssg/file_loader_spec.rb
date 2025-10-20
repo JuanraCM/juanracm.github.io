@@ -3,12 +3,6 @@
 require 'spec_helper'
 
 describe SSG::FileLoader do
-  before do
-    stub_const('SSG::LAYOUTS_DIR', fixture_path('layouts'))
-    stub_const('SSG::PAGES_DIR', fixture_path('pages'))
-    stub_const('SSG::ASSETS_DIR', fixture_path('assets'))
-  end
-
   describe '.load_layouts' do
     it 'loads all layout files from the layouts directory', :aggregate_failures do
       layouts = described_class.load_layouts

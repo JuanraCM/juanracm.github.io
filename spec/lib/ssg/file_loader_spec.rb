@@ -35,10 +35,6 @@ describe SSG::FileLoader do
   end
 
   describe '.load_asset' do
-    before do
-      stub_const('SSG::ASSETS_DIR', fixture_path('assets'))
-    end
-
     context 'when the asset exists' do
       it 'loads the asset file content' do
         content = described_class.load_asset('icon.svg')

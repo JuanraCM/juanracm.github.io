@@ -23,7 +23,9 @@
     document.documentElement.setAttribute('data-theme', theme);
   }
 
-  function toggleTheme() {
+  function toggleTheme(event) {
+    event.preventDefault();
+
     const currentTheme = document.documentElement.getAttribute('data-theme') || LIGHT_THEME;
     const newTheme = currentTheme === DARK_THEME ? LIGHT_THEME : DARK_THEME;
     setTheme(newTheme);

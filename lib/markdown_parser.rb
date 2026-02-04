@@ -2,6 +2,7 @@
 
 require 'commonmarker'
 require 'yaml'
+require 'date'
 
 require_relative 'config'
 

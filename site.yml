@@ -7,3 +7,5 @@ author:
 bio:
   long_version: "I build software, break things (on purpose), and write about what I learn along the way. I'm endlessly curious about technology and love sharing my knowledge with others."
   short_version: "I build software, break things (on purpose), and write about what I learn along the way."
+
+resume_filename: "resume.pdf"

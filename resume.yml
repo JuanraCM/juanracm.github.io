@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://github.com/rendercv/rendercv/blob/main/schema.json?raw=true
+
+cv:
+  name: Juan Ramón Carretero Martín
+  location: Las Palmas de Gran Canaria, Spain
+  email: juanracm.dev@gmail.com
+  phone: +34-696-193-280
+  website: https://juanracm.github.io
+  social_networks:
+    - network: LinkedIn
+      username: juanracm97
+    - network: GitHub
+      username: JuanraCM
+  sections:
+    profile:
+      - Full Stack developer with 6+ years of experience in building Ruby On Rails applications.
+      - I feel confident about my analytical and problem-solving skills to face new challenges. I consider myself a quick learner and a team player.
+      - I strongly adhere to the KISS and SOLID design principles, since I believe simple solutions are always easier to maintain and extend.
+    skills:
+      - Ruby On Rails, REST APIs, GraphQL, PostgreSQL, MongoDB, MySQL, Redis, Sidekiq, Docker, AWS, Terraform, Git, RSpec, TDD, Agile methodologies.
+    experience:
+      - company: Tirant Lo Blanch
+        position: Full Stack Developer
+        start_date: 2024-06
+        end_date: present
+        location: Valencia, Spain
+        highlights:
+          - Development of a legal documents database using Ruby On Rails, MongoDB and MySQL.
+          - Refactored documents indexing system, allowing asynchronous processing and improving system scalability using Sidekiq and Redis.
+          - Led a large-scale document data exportation for AI training purposes.
+      - company: Astara Store
+        position: Full Stack Developer
+        start_date: 2022-12
+        end_date: 2024-04
+        location: Madrid, Spain
+        highlights:
+          - Design of a SaaS API for building ecommerce products for online vehicle sales, using Ruby On Rails and PostgreSQL.
+          - Redesign and maintenance of the infrastructure using AWS and Terraform.
+          - Responsible of infrastructure maintenance and security compliance through automated cybersecurity audits.
+      - company: Welov
+        position: Full Stack Developer
+        start_date: 2019-06
+        end_date: 2022-12
+        location: Las Palmas de Gran Canaria, Spain
+        highlights:
+          - Development of a social media analytics and measurement platform using Ruby On Rails and MongoDB.
+          - Led the design and implementation of a public REST API for data export and integration with Google Looker Studio.
+          - Integration and maintenance of third-party APIs such as X or Meta for data extraction.
+    education:
+      - institution: IES El Rincón
+        area: Cross-platform Applications Development
+        start_date: 2017-09
+        end_date: 2019-06
+        location: Las Palmas de Gran Canaria, Spain

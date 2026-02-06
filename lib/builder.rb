@@ -29,6 +29,8 @@ module SSG
         ResumeRenderer.render
       rescue SSGError => e
         logger.error "Build failed: #{e.message}"
+
+        raise e
       end
 
       def prepare_output_dir

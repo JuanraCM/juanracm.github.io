@@ -4,9 +4,17 @@ require 'spec_helper'
 
 describe SSG::ResumeRenderer do
   describe '.render' do
-    let(:expected_command) { "rendercv render #{SSG::ResumeRenderer::RESUME_CONFIG_FILE} -pdf #{SSG::BUILD_DIR}/resume.pdf" }
     let(:success_status) { instance_double(Process::Status, success?: true, exitstatus: 0) }
     let(:failure_status) { instance_double(Process::Status, success?: false, exitstatus: 127) }
+    let(:expected_rendercv_args) do
+      [
+        'rendercv',
+        'render',
+        SSG::ResumeRenderer::RESUME_CONFIG_FILE,
+        '-pdf',
+        "#{SSG::BUILD_DIR}/resume.pdf"
+      ]
+    end
 
     before do
       allow(SSG::SiteConfig).to receive(:resume_filename).and_return('resume.pdf')
@@ -20,7 +28,7 @@ describe SSG::ResumeRenderer do
       it 'executes rendercv command with correct arguments' do
         described_class.render
 
-        expect(Open3).to have_received(:capture2e).with(expected_command)
+        expect(Open3).to have_received(:capture2e).with(*expected_rendercv_args)
       end
 
       it 'does not raise an error' do

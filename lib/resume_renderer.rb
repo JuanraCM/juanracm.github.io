@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'fileutils'
 require 'open3'
 
 require_relative 'config'
@@ -13,8 +12,13 @@ module SSG
     RESUME_CONFIG_FILE = File.join(ROOT_DIR, 'resume.yml').freeze
 
     def self.render
-      command = "rendercv render #{RESUME_CONFIG_FILE} -pdf #{BUILD_DIR}/#{SiteConfig.resume_filename}"
-      output, status = Open3.capture2e(command)
+      output, status = Open3.capture2e(
+        'rendercv',
+        'render',
+        RESUME_CONFIG_FILE,
+        '-pdf',
+        "#{BUILD_DIR}/#{SiteConfig.resume_filename}"
+      )
 
       return if status.success?
 

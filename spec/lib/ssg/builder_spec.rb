@@ -29,8 +29,8 @@ describe SSG::Builder do
           .and_raise(SSG::SSGError, 'Layout load error')
       end
 
-      it 'handles errors gracefully' do
-        expect { described_class.build }.not_to raise_error
+      it 'logs error and raises exception' do
+        expect { described_class.build }.to raise_error(SSG::SSGError, 'Layout load error')
       end
     end
   end

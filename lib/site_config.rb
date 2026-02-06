@@ -7,7 +7,7 @@ module SSG
     SITE_CONFIG_FILE = File.join(ROOT_DIR, 'site.yml').freeze
 
     class << self
-      attr_reader :posts, :author, :bio
+      attr_reader :posts, :author, :bio, :resume_filename
 
       def update(pages)
         load_site_config
@@ -21,6 +21,7 @@ module SSG
 
         @author = config[:author]
         @bio = config[:bio]
+        @resume_filename = config[:resume_filename]
       end
 
       def load_posts(pages)

@@ -7,3 +7,5 @@ author:
 bio:
   long_version: "Lorem ipsum dolor sit amet"
   short_version: "Lorem ipsum"
+
+resume_filename: "resume.pdf"

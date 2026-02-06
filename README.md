@@ -2,7 +2,7 @@
 
 Welcome to my personal blog! Here, I share my thoughts, experiences, and knowledge on programming and technology in general.
 
-This blog was built using a custom static site generator written in Ruby. The source code is available on this same repository.
+This blog was built using a custom static site generator written in Ruby. The source code is available on this same repository. Resume rendering is powered by [RenderCV](https://rendercv.com/).
 
 ## Installation
 
@@ -11,6 +11,8 @@ To run the static site generator locally, you need to have Ruby installed on you
 ```sh
 cd juanracm.github.io && bundle install
 ```
+
+You also need to install [RenderCV](https://rendercv.com/) to generate the resume PDF during the build process.
 
 ## Usage
 

@@ -14,6 +14,7 @@ describe SSG::Builder do
       allow(SSG::PageRenderer).to receive(:new).and_return(renderer)
       allow(renderer).to receive(:render_all).once
       allow(SSG::AssetCopier).to receive(:copy_assets).once
+      allow(SSG::ResumeRenderer).to receive(:render).once
     end
 
     describe 'successful build' do
@@ -28,8 +29,8 @@ describe SSG::Builder do
           .and_raise(SSG::SSGError, 'Layout load error')
       end
 
-      it 'handles errors gracefully' do
-        expect { described_class.build }.not_to raise_error
+      it 'logs error and raises exception' do
+        expect { described_class.build }.to raise_error(SSG::SSGError, 'Layout load error')
       end
     end
   end

@@ -4,9 +4,15 @@
       <div class="header__content">
         <h1 class="header__title"><%= site.author[:name] %></h1>
         <h3 class="header__bio"><%= site.bio[:long_version] %></h3>
-        <div class="header__social">
+        <div class="header__links">
           <a href="<%= site.author[:github_url] %>" target="_blank">
             GitHub
+          </a>
+
+          <div class="header__links__separator"></div>
+
+          <a href="<%= site.resume_filename %>" target="_blank">
+            Resume
           </a>
         </div>
       </div>

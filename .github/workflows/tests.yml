@@ -1,4 +1,4 @@
-name: Tests with RSpec
+name: Tests
 
 on:
   push:
@@ -12,12 +12,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v31
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.4'
-        bundler-cache: true
+    - name: Install dependencies
+      run: nix develop --command bundle install
 
     - name: Run RSpec
-      run: bundle exec rspec
+      run: nix develop --command bundle exec rspec
+
+    - name: Run RuboCop
+      run: nix develop --command bundle exec rubocop
+
+    - name: Build site
+      run: nix develop --command bin/build

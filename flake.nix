@@ -17,11 +17,6 @@
           ruby
           rendercv
         ];
-
-        shellHook = ''
-          echo "Refreshing dependencies..."
-          bundle install
-        '';
       };
     };
 }

@@ -34,6 +34,7 @@ describe SSG::SiteConfig do
       described_class.instance_variable_set(:@posts, nil)
       described_class.instance_variable_set(:@author, nil)
       described_class.instance_variable_set(:@bio, nil)
+      described_class.instance_variable_set(:@resume_filename, nil)
 
       described_class.update(pages)
     end
@@ -71,6 +72,10 @@ describe SSG::SiteConfig do
 
       expect(described_class.bio).to be_a(Hash)
       expect(described_class.bio[:short_version]).to eq('Lorem ipsum')
+    end
+
+    it 'includes resume_filename from site config file' do
+      expect(described_class.resume_filename).to eq('resume.pdf')
     end
   end
 end

@@ -14,6 +14,7 @@ describe SSG::Builder do
       allow(SSG::PageRenderer).to receive(:new).and_return(renderer)
       allow(renderer).to receive(:render_all).once
       allow(SSG::AssetCopier).to receive(:copy_assets).once
+      allow(SSG::ResumeRenderer).to receive(:render).once
     end
 
     describe 'successful build' do

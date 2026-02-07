@@ -31,5 +31,6 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
         with:
-          name: site-build
+          name: site-build-pr-${{ github.event.pull_request.number }}
           path: ./build
+          retention-days: 2

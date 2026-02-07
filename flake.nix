@@ -14,8 +14,12 @@
     {
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
+          # Dependencies
           ruby
           rendercv
+
+          # LSPs
+          yaml-language-server
         ];
       };
     };

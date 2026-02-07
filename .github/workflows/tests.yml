@@ -2,26 +2,34 @@ name: Tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: cachix/install-nix-action@v31
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
 
-    - name: Install dependencies
-      run: nix develop --command bundle install
+      - name: Install dependencies
+        run: nix develop --command bundle install
 
-    - name: Run RSpec
-      run: nix develop --command bundle exec rspec
+      - name: Run RSpec
+        run: nix develop --command bundle exec rspec
 
-    - name: Run RuboCop
-      run: nix develop --command bundle exec rubocop
+      - name: Run RuboCop
+        run: nix develop --command bundle exec rubocop
 
-    - name: Build site
-      run: nix develop --command bin/build
+      - name: Build site
+        if: github.event_name == 'pull_request'
+        run: nix develop --command bin/build
+
+      - name: Upload build artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-build
+          path: ./build

@@ -17,9 +17,11 @@
           # Dependencies
           ruby
           rendercv
+          libyaml
 
           # LSPs
           yaml-language-server
+          ruby-lsp
         ];
       };
     };

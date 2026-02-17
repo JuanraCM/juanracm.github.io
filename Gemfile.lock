@@ -37,6 +37,7 @@ GEM
     matrix (0.4.3)
     method_source (1.1.0)
     mini_mime (1.1.5)
+    nio4r (2.7.5)
     nokogiri (1.18.10-aarch64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.18.10-aarch64-linux-musl)
@@ -58,6 +59,8 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (6.0.2)
+    puma (7.2.0)
+      nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.2.3)
     rack-test (2.2.0)
@@ -104,7 +107,6 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.1.0)
-    webrick (1.9.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -122,11 +124,11 @@ DEPENDENCIES
   listen
   logger
   pry
+  puma
   rspec
   rubocop
   rubocop-capybara
   rubocop-rspec
-  webrick
 
 BUNDLED WITH
    2.6.7

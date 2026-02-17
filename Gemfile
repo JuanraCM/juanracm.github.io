@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # Dev server
-gem 'webrick'
+gem 'puma'
 
 # File watching
 gem 'listen'

@@ -4,6 +4,7 @@ GEM
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.3)
+    base64 (0.2.0)
     capybara (3.40.0)
       addressable
       matrix
@@ -119,6 +120,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  base64
   capybara
   commonmarker
   listen

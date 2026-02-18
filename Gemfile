@@ -11,6 +11,9 @@ gem 'listen'
 # Markdown processing
 gem 'commonmarker'
 
+# Encoding
+gem 'base64'
+
 # Logging
 gem 'logger'
 

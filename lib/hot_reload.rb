@@ -2,6 +2,7 @@
 
 require_relative 'config'
 require_relative 'event_logger'
+require_relative 'hot_reload/sse_middleware'
 
 require 'listen'
 
@@ -12,37 +13,10 @@ module SSG
 
     class << self
       def start
-        @enabled = true
-
         with_changed_files do
           rebuild_site
-          update_refresh_timestamp
+          notify_rebuild
         end
-      end
-
-      def inject_html_snippet(html)
-        return html unless @enabled
-
-        hr_snippet = <<~HTML
-          <script>
-            let refreshedAt;
-
-            setInterval(() => {
-              console.info('Checking for updates...');
-
-              fetch('/refresh.txt')
-                .then(response => response.text())
-                .then(data => {
-                  if (refreshedAt && refreshedAt !== data) {
-                    window.location.reload();
-                  }
-                  refreshedAt = data;
-                });
-            }, #{SNIPPET_UPDATE_THRESHOLD});
-          </script>
-        HTML
-
-        html.sub!('</body>', "#{hr_snippet}</body>")
       end
 
       private
@@ -68,9 +42,8 @@ module SSG
         SSG::Builder.build
       end
 
-      def update_refresh_timestamp
-        timestamp_file = File.join(BUILD_DIR, 'refresh.txt')
-        File.write(timestamp_file, Time.now.to_s)
+      def notify_rebuild
+        SSG::HotReload::SSEMiddleware.broadcast('rebuild')
       end
 
       def logger

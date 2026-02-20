@@ -25,8 +25,6 @@ module SSG
       raise_missing_layout_error(page_path) unless layout_name
 
       rendered_page = ViewContext.new(@layouts, page_data).render
-      HotReload.inject_html_snippet(rendered_page)
-
       output_path = File.join(BUILD_DIR, "#{page_path}.html")
 
       FileUtils.mkdir_p(File.dirname(output_path))

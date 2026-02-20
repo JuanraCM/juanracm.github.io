@@ -16,7 +16,10 @@ module SSG
     end
 
     def start
-      trap('INT') { @server.stop(true) }
+      trap('INT') do
+        SSG::HotReload::SSEMiddleware.remove_all_connections
+        @server.stop(true)
+      end
 
       logger.info "Serving #{BUILD_DIR} at http://localhost:#{@port}"
       @server.run(false)

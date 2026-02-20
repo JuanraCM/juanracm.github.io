@@ -11,11 +11,9 @@ module SSG
             const eventSource = new EventSource('/hot-reload/events');
 
             eventSource.onmessage = function(event) {
-              if (event.data === 'reload') {
+              if (event.data === 'rebuild') {
                 console.log('[Hot Reload] Changes detected, reloading...');
                 window.location.reload();
-              } else if (event.data === 'ping') {
-                console.log('[Hot Reload] Ping received');
               }
             };
 

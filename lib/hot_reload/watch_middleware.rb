@@ -69,7 +69,7 @@ module SSG
       end
 
       def logger
-        @logger ||= SSG::EventLogger.new('HotReload::Watcher')
+        @logger ||= SSG::EventLogger.new('HotReload::WatchMiddleware')
       end
     end
   end

@@ -8,4 +8,7 @@ module SSG
   PAGES_DIR   = File.join(ROOT_DIR, 'pages')
   ASSETS_DIR  = File.join(ROOT_DIR, 'assets')
   BUILD_DIR   = File.join(ROOT_DIR, 'build')
+
+  SITE_CONFIG_FILE   = File.join(ROOT_DIR, 'site.yml').freeze
+  RESUME_CONFIG_FILE = File.join(ROOT_DIR, 'resume.yml').freeze
 end

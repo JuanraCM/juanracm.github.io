@@ -9,8 +9,6 @@ module SSG
   class ResumeRenderer
     class ResumeRenderError < SSGError; end
 
-    RESUME_CONFIG_FILE = File.join(ROOT_DIR, 'resume.yml').freeze
-
     def self.render
       output, status = Open3.capture2e(
         'rendercv',

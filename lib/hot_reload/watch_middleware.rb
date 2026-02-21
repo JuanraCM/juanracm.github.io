@@ -9,7 +9,13 @@ require_relative '../builder'
 module SSG
   module HotReload
     class WatchMiddleware
-      TARGET_DIRECTORIES = [ASSETS_DIR, LAYOUTS_DIR, PAGES_DIR].freeze
+      TARGET_PATHS = [
+        ASSETS_DIR,
+        LAYOUTS_DIR,
+        PAGES_DIR,
+        RESUME_CONFIG_FILE,
+        SITE_CONFIG_FILE
+      ].freeze
 
       def initialize(app)
         @app = app
@@ -23,14 +29,14 @@ module SSG
       private
 
       def start_listener
-        listener = Listen.to(*TARGET_DIRECTORIES) do |modified, added, removed|
-          logger.debug 'Changes detected. Rebuilding site...'
+        listener = Listen.to(ROOT_DIR) do |modified, added, removed|
+          changed_files = filter_changed_files(modified, added, removed)
+          next if changed_files.empty?
 
-          changed_files = (modified + added + removed).uniq
+          logger.debug 'Changes detected. Rebuilding site...'
           logger.debug "Files changed: #{changed_files.join(', ')}"
 
           rebuild_site
-          update_refresh_timestamp
 
           logger.info 'Rebuild complete.'
         end
@@ -39,9 +45,18 @@ module SSG
         listener.start
       end
 
+      def filter_changed_files(modified, added, removed)
+        unique_files = (modified + added + removed).uniq
+        unique_files.select do |file|
+          TARGET_PATHS.any? { |target| file.start_with?(target) }
+        end
+      end
+
       def rebuild_site
         SSG::Builder.prepare_output_dir
         SSG::Builder.build
+
+        update_refresh_timestamp
       end
 
       def update_refresh_timestamp

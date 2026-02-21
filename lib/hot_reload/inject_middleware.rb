@@ -41,8 +41,9 @@ module SSG
               console.info('Checking for updates...');
 
               fetch('/refresh.txt')
-                .then(response => response.text())
+                .then(response => response.ok && response.text())
                 .then(data => {
+                  if (!data) return;
                   if (refreshedAt && refreshedAt !== data) {
                     window.location.reload();
                   }

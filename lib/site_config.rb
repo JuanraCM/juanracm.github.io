@@ -2,10 +2,10 @@
 
 require 'yaml'
 
+require_relative 'config'
+
 module SSG
   module SiteConfig
-    SITE_CONFIG_FILE = File.join(ROOT_DIR, 'site.yml').freeze
-
     class << self
       attr_reader :posts, :author, :bio, :resume_filename
 

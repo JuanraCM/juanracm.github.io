@@ -2,7 +2,7 @@
 
 require_relative 'config'
 require_relative 'event_logger'
-require_relative 'hot_reload/sse_middleware'
+require_relative 'hot_reload/watch_middleware'
 require_relative 'hot_reload/inject_middleware'
 
 require 'puma'
@@ -17,7 +17,6 @@ module SSG
 
     def start
       trap('INT') do
-        SSG::HotReload::SSEMiddleware.remove_all_connections
         @server.stop(true)
       end
 
@@ -31,16 +30,16 @@ module SSG
       server_logger = logger
 
       app = Rack::Builder.new do
-        use SSG::HotReload::SSEMiddleware
+        use SSG::HotReload::WatchMiddleware
         use SSG::HotReload::InjectMiddleware
         use Rack::Static, urls: [''], root: BUILD_DIR, index: 'index.html', cascade: true
 
         run lambda { |env|
           path = env['PATH_INFO']
-          server_logger.error "File not found: #{path}"
+          server_logger.error "File not found: #{path}" unless path == '/refresh.txt'
           [404, { 'Content-Type' => 'text/plain' }, ["File not found: #{path}"]]
         }
-      end
+      end.to_app
 
       Puma::Server.new(app, nil).tap do |server|
         server.add_tcp_listener('0.0.0.0', @port)

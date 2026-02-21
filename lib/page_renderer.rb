@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'config'
-require_relative 'hot_reload'
 require_relative 'view_context'
 
 module SSG

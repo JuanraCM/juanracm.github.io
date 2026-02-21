@@ -5,31 +5,7 @@ require 'base64'
 module SSG
   module HotReload
     class InjectMiddleware
-      INJECT_SNIPPET = <<~HTML
-        <script>
-          (function() {
-            const eventSource = new EventSource('/hot-reload/events');
-
-            eventSource.onmessage = function(event) {
-              if (event.data === 'rebuild') {
-                console.log('[Hot Reload] Changes detected, reloading...');
-                window.location.reload();
-              }
-            };
-
-            eventSource.onerror = function(error) {
-              console.error('[Hot Reload] Connection error:', error);
-              eventSource.close();
-            };
-
-            window.addEventListener('beforeunload', function() {
-              eventSource.close();
-            });
-
-            console.info('[Hot Reload] Connected');
-          })();
-        </script>
-      HTML
+      SNIPPET_UPDATE_THRESHOLD = 500
 
       def initialize(app)
         @app = app
@@ -44,7 +20,7 @@ module SSG
 
           [status, headers, [modified_body]]
         elsif headers['content-type'] == 'application/pdf'
-          modified_body = wrap_pdf_in_html(body)
+          modified_body = inject_pdf_snippet(body)
           headers['content-type'] = 'text/html'
           headers['content-length'] = modified_body.bytesize.to_s
 
@@ -56,12 +32,33 @@ module SSG
 
       private
 
-      def inject_html_snippet(raw_body)
-        html = fetch_response_body(raw_body)
-        html.sub('</body>', "#{INJECT_SNIPPET}</body>")
+      def inject_snippet
+        <<~HTML
+          <script>
+            let refreshedAt;
+
+            setInterval(() => {
+              console.info('Checking for updates...');
+
+              fetch('/refresh.txt')
+                .then(response => response.text())
+                .then(data => {
+                  if (refreshedAt && refreshedAt !== data) {
+                    window.location.reload();
+                  }
+                  refreshedAt = data;
+                });
+            }, #{SNIPPET_UPDATE_THRESHOLD});
+          </script>
+        HTML
       end
 
-      def wrap_pdf_in_html(raw_body)
+      def inject_html_snippet(raw_body)
+        html = fetch_response_body(raw_body)
+        html.sub('</body>', "#{inject_snippet}</body>")
+      end
+
+      def inject_pdf_snippet(raw_body)
         pdf_data = fetch_response_body(raw_body)
         base64_pdf = Base64.strict_encode64(pdf_data)
 
@@ -72,7 +69,7 @@ module SSG
             </head>
             <body style="margin:0; padding:0; overflow:hidden;">
               <embed src="data:application/pdf;base64,#{base64_pdf}" type="application/pdf" width="100%" height="100%"/>
-              #{INJECT_SNIPPET}
+              #{inject_snippet}
             </body>
           </html>
         HTML

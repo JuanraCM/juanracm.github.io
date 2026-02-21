@@ -9,7 +9,7 @@ require_relative '../builder'
 module SSG
   module HotReload
     class WatchMiddleware
-      REFRESH_FILE = File.join(BUILD_DIR, 'refresh.txt')
+      SSE_PATH = '/__hot_reload'
       TARGET_PATHS = [
         ASSETS_DIR,
         LAYOUTS_DIR,
@@ -19,19 +19,59 @@ module SSG
       ].freeze
 
       def initialize(app)
-        @app = app
+        @app     = app
+        @clients = []
+        @mutex   = Mutex.new
+
         start_listener
       end
 
       def call(env)
-        if env['PATH_INFO'] == '/refresh.txt' && !File.exist?(REFRESH_FILE)
-          return [200, { 'Content-Type' => 'text/plain' }, ['']]
-        end
+        return sse_response if env['PATH_INFO'] == SSE_PATH
 
         @app.call(env)
       end
 
       private
+
+      def sse_response
+        [
+          200,
+          {
+            'Content-Type' => 'text/event-stream',
+            'Cache-Control' => 'no-cache',
+            'Connection' => 'keep-alive'
+          },
+          proc { |client| handle_sse_response(client) }
+        ]
+      end
+
+      def handle_sse_response(client)
+        @mutex.synchronize { @clients << client }
+
+        loop do
+          sleep 1
+          client.write(": keep-alive\n\n")
+          client.flush
+        end
+      rescue IOError, Errno::EPIPE
+        client.close
+        @mutex.synchronize { @clients.delete(client) }
+      end
+
+      def notify_clients
+        @mutex.synchronize do
+          @clients.reject! do |client|
+            client.write("data: refresh\n\n")
+            client.flush
+
+            false
+          rescue IOError, Errno::EPIPE
+            client.close
+            true
+          end
+        end
+      end
 
       def start_listener
         listener = Listen.to(ROOT_DIR) do |modified, added, removed|
@@ -42,6 +82,7 @@ module SSG
           logger.debug "Files changed: #{changed_files.join(', ')}"
 
           rebuild_site
+          notify_clients
 
           logger.info 'Rebuild complete.'
         end
@@ -60,12 +101,6 @@ module SSG
       def rebuild_site
         SSG::Builder.prepare_output_dir
         SSG::Builder.build
-
-        update_refresh_timestamp
-      end
-
-      def update_refresh_timestamp
-        File.write(File.join(REFRESH_FILE), Time.now.to_s)
       end
 
       def logger

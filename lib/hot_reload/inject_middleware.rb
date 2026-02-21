@@ -35,21 +35,9 @@ module SSG
       def inject_snippet
         <<~HTML
           <script>
-            let refreshedAt;
-
-            setInterval(() => {
-              console.info('Checking for updates...');
-
-              fetch('/refresh.txt')
-                .then(response => response.text())
-                .then(data => {
-                  if (!data) return;
-                  if (refreshedAt && refreshedAt !== data) {
-                    window.location.reload();
-                  }
-                  refreshedAt = data;
-                });
-            }, #{SNIPPET_UPDATE_THRESHOLD});
+            const es = new EventSource('/__hot_reload');
+            es.onmessage = () => window.location.reload();
+            es.onerror   = () => es.close();
           </script>
         HTML
       end

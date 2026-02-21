@@ -16,9 +16,7 @@ module SSG
     end
 
     def start
-      trap('INT') do
-        @server.stop(true)
-      end
+      trap('INT') { @server.stop(true) }
 
       logger.info "Serving #{BUILD_DIR} at http://localhost:#{@port}"
       @server.run(false)

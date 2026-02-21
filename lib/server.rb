@@ -36,7 +36,7 @@ module SSG
 
         run lambda { |env|
           path = env['PATH_INFO']
-          server_logger.error "File not found: #{path}" unless path == '/refresh.txt'
+          server_logger.error "File not found: #{path}"
           [404, { 'Content-Type' => 'text/plain' }, ["File not found: #{path}"]]
         }
       end.to_app

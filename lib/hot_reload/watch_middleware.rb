@@ -9,6 +9,7 @@ require_relative '../builder'
 module SSG
   module HotReload
     class WatchMiddleware
+      REFRESH_FILE = File.join(BUILD_DIR, 'refresh.txt')
       TARGET_PATHS = [
         ASSETS_DIR,
         LAYOUTS_DIR,
@@ -23,6 +24,10 @@ module SSG
       end
 
       def call(env)
+        if env['PATH_INFO'] == '/refresh.txt' && !File.exist?(REFRESH_FILE)
+          return [200, { 'Content-Type' => 'text/plain' }, ['']]
+        end
+
         @app.call(env)
       end
 
@@ -60,7 +65,7 @@ module SSG
       end
 
       def update_refresh_timestamp
-        File.write(File.join(BUILD_DIR, 'refresh.txt'), Time.now.to_s)
+        File.write(File.join(REFRESH_FILE), Time.now.to_s)
       end
 
       def logger

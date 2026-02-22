@@ -41,6 +41,8 @@ module SSG
 
       def shutdown
         @shutdown = true
+
+        logger.info 'Shutting down WatchMiddleware...'
       end
 
       private

@@ -7,7 +7,6 @@ require 'optparse'
 
 require_relative '../lib/builder'
 require_relative '../lib/server'
-require_relative '../lib/hot_reload'
 
 port = 8000
 
@@ -23,8 +22,6 @@ OptionParser.new do |opts|
     exit
   end
 end.parse!
-
-SSG::HotReload.start
 
 SSG::Builder.prepare_output_dir
 SSG::Builder.build

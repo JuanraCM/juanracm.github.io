@@ -10,7 +10,7 @@ describe SSG::ResumeRenderer do
       [
         'rendercv',
         'render',
-        SSG::ResumeRenderer::RESUME_CONFIG_FILE,
+        SSG::RESUME_CONFIG_FILE,
         '-pdf',
         "#{SSG::BUILD_DIR}/resume.pdf"
       ]

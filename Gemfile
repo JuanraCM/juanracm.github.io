@@ -3,13 +3,16 @@
 source 'https://rubygems.org'
 
 # Dev server
-gem 'webrick'
+gem 'puma'
 
 # File watching
 gem 'listen'
 
 # Markdown processing
 gem 'commonmarker'
+
+# Encoding
+gem 'base64'
 
 # Logging
 gem 'logger'

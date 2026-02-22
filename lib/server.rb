@@ -16,7 +16,10 @@ module SSG
     end
 
     def start
-      trap('INT') { @server.stop(true) }
+      trap('INT') do
+        @server.stop(true)
+        SSG::HotReload::WatchMiddleware.instance.shutdown
+      end
 
       logger.info "Serving #{BUILD_DIR} at http://localhost:#{@port}"
       @server.run(false)

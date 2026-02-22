@@ -18,10 +18,17 @@ module SSG
         SITE_CONFIG_FILE
       ].freeze
 
+      class << self
+        attr_accessor :instance
+      end
+
       def initialize(app)
-        @app     = app
-        @clients = []
-        @mutex   = Mutex.new
+        @app      = app
+        @clients  = []
+        @mutex    = Mutex.new
+        @shutdown = false
+
+        self.class.instance = self
 
         start_listener
       end
@@ -30,6 +37,10 @@ module SSG
         return sse_response if env['PATH_INFO'] == SSE_PATH
 
         @app.call(env)
+      end
+
+      def shutdown
+        @shutdown = true
       end
 
       private
@@ -50,11 +61,15 @@ module SSG
         @mutex.synchronize { @clients << client }
 
         loop do
+          break if @shutdown
+
           sleep 1
           client.write(": keep-alive\n\n")
           client.flush
         end
       rescue IOError, Errno::EPIPE
+        # Client disconnected
+      ensure
         client.close
         @mutex.synchronize { @clients.delete(client) }
       end

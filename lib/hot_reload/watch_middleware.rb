@@ -27,6 +27,7 @@ module SSG
         @clients  = []
         @mutex    = Mutex.new
         @shutdown = false
+        @listener = nil
 
         self.class.instance = self
 
@@ -42,7 +43,10 @@ module SSG
       def shutdown
         @shutdown = true
 
-        Thread.new { logger.info 'Shutting down WatchMiddleware...' }
+        Thread.new do
+          logger.info 'Shutting down WatchMiddleware...'
+          @listener.stop
+        end
       end
 
       private
@@ -52,8 +56,7 @@ module SSG
           200,
           {
             'Content-Type' => 'text/event-stream',
-            'Cache-Control' => 'no-cache',
-            'Connection' => 'keep-alive'
+            'Cache-Control' => 'no-cache'
           },
           proc { |client| handle_sse_response(client) }
         ]
@@ -91,7 +94,7 @@ module SSG
       end
 
       def start_listener
-        listener = Listen.to(ROOT_DIR) do |modified, added, removed|
+        @listener = Listen.to(ROOT_DIR) do |modified, added, removed|
           changed_files = filter_changed_files(modified, added, removed)
           next if changed_files.empty?
 
@@ -105,7 +108,7 @@ module SSG
         end
 
         logger.info 'Starting file listener...'
-        listener.start
+        @listener.start
       end
 
       def filter_changed_files(modified, added, removed)

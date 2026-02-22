@@ -5,8 +5,6 @@ require 'base64'
 module SSG
   module HotReload
     class InjectMiddleware
-      SNIPPET_UPDATE_THRESHOLD = 500
-
       def initialize(app)
         @app = app
       end

@@ -75,5 +75,14 @@ describe SSG::HotReload::WatchMiddleware do
       expect { middleware.shutdown }
         .to change { middleware.instance_variable_get(:@shutdown) }.from(false).to(true)
     end
+
+    it 'stops the listener in a new thread' do
+      allow(Thread).to receive(:new).and_yield
+      allow(listener_double).to receive(:stop)
+
+      middleware.shutdown
+
+      expect(listener_double).to have_received(:stop)
+    end
   end
 end

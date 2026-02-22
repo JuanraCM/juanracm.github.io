@@ -33,7 +33,7 @@ module SSG
       app = Rack::Builder.new do
         use SSG::HotReload::WatchMiddleware
         use SSG::HotReload::InjectMiddleware
-        use Rack::Static, urls: [''], root: BUILD_DIR, index: 'index.html', cascade: true
+        use Rack::Static, urls: ['/'], root: BUILD_DIR, index: 'index.html', cascade: true
 
         run lambda { |env|
           path = env['PATH_INFO']

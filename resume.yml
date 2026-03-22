@@ -15,6 +15,9 @@ design:
   header:
     connections:
       phone_number_format: international
+  page:
+    show_top_note: false
+    show_footer: false
   templates:
     experience_entry:
       date_and_location_column: |-

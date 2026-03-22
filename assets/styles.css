@@ -369,9 +369,15 @@ body {
         line-height: 1.3;
       }
 
-      .sidebar__social {
+      .sidebar__links {
         a {
+          display: block;
           font-size: var(--font-size-4);
+        }
+
+        .sidebar__links__separator {
+          height: 1px;
+          margin-bottom: var(--space-2);
         }
       }
     }

@@ -22,8 +22,15 @@
       <img src="<%= site.author[:image_url] %>" alt="<%= site.author[:short_name] %>" class="sidebar__image">
       <div class="sidebar__author"><%= site.author[:name] %></div>
       <div class="sidebar__bio"><%= site.bio[:short_version] %></div>
-      <div class="sidebar__social">
+      <div class="sidebar__links">
         <a href="<%= site.author[:github_url] %>">GitHub</a>
+        <a href="<%= site.author[:linkedin_url] %>">LinkedIn</a>
+
+        <div class="sidebar__links__separator"></div>
+
+        <a href="/<%= site.resume_filename %>" target="_blank">
+          Resume
+        </a>
       </div>
     </div>
   </div>

@@ -44,7 +44,7 @@ cv:
       - Committed to the KISS and SOLID design principles, ensuring maintainable and efficient codebases.
     skills:
       - label: Hard Skills
-        details: Ruby On Rails, REST APIs, PostgreSQL, MongoDB, MySQL, Redis, Sidekiq, Docker, AWS, Terraform, Git, Nix, Linux.
+        details: Ruby On Rails, REST APIs, PostgreSQL, MongoDB, MySQL, Redis, Sidekiq, Docker, AWS, Terraform, Vue.js, GitHub Copilot, OpenCode.
       - label: Soft Skills
         details: Effective communication, teamwork, adaptability, problem-solving and strong work ethic.
     experience:

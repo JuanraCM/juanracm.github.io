@@ -40,13 +40,13 @@ cv:
   sections:
     profile:
       - Full Stack developer with 6+ years of experience in building scalable Ruby On Rails applications.
-      - Quick learner with strong analytical and problem-solving skills, able to adapt to new technologies and frameworks as needed.
-      - Strongly adhere to the KISS and SOLID design principles, ensuring maintainable and efficient codebases.
+      - Strong analytical and problem-solving skills, able to adapt to new technologies and frameworks as needed.
+      - Committed to the KISS and SOLID design principles, ensuring maintainable and efficient codebases.
     skills:
       - label: Hard Skills
         details: Ruby On Rails, REST APIs, PostgreSQL, MongoDB, MySQL, Redis, Sidekiq, Docker, AWS, Terraform, Git, Nix, Linux.
       - label: Soft Skills
-        details: Efficient communication, problem-solving skills, attention to detail, empathy and teamwork.
+        details: Effective communication, teamwork, adaptability, problem-solving and strong work ethic.
     experience:
       - company: Tirant Lo Blanch
         position: Full Stack Developer
@@ -54,19 +54,19 @@ cv:
         end_date: present
         location: Valencia, Spain
         highlights:
-          - Development of a legal documents database using Ruby On Rails, Vue.js, MongoDB and MySQL.
+          - Developed a legal documents database using Ruby On Rails, Vue.js, MongoDB and MySQL.
           - Refactored documents indexing system, allowing asynchronous processing and improving system scalability using Sidekiq and Redis.
           - Led a large-scale document data exportation for AI training purposes.
-          - Contributed to a squad responsible for integrating AI tools into the development workflow of other teammates, improving their productivity and code quality.
+          - Collaborated on integrating AI tools into the development workflow, enhancing developer productivity and code quality.
       - company: Astara Store
         position: Full Stack Developer
         start_date: 2022-12
         end_date: 2024-04
         location: Madrid, Spain
         highlights:
-          - Design of a SaaS API for building ecommerce products for online vehicle sales, using Ruby On Rails, Vue.js, and PostgreSQL.
-          - Redesign and maintenance of the infrastructure using AWS and Terraform.
-          - Improved API latency across clients in different regions by implementing caching strategies and optimizing database queries.
+          - Designed a SaaS API for building ecommerce products for online vehicle sales, using Ruby On Rails, Vue.js, and PostgreSQL.
+          - Redesigned and maintained infrastructure using AWS and Terraform, mentoring other team members in infrastructure as code to standardize workflow and improve team overall efficiency.
+          - Reduced API latency by over 50% across LATAM regions by implementing infrastructure optimizations and caching strategies.
           - Responsible for infrastructure maintenance and security compliance through automated cybersecurity audits.
       - company: Welov
         position: Full Stack Developer
@@ -74,10 +74,10 @@ cv:
         end_date: 2022-12
         location: Las Palmas de Gran Canaria, Spain
         highlights:
-          - Development of a social media analytics and measurement platform using Ruby On Rails and MongoDB.
-          - Led the design and implementation of a public REST API for data export and integration with Google Looker Studio.
-          - Implementation and maintenance of custom automated reports for clients, improving their data analysis capabilities and decision-making processes.
-          - Integration and maintenance of third-party APIs such as X or Meta for data extraction.
+          - Developed a social media analytics and measurement platform using Ruby On Rails and MongoDB.
+          - Led the design and implementation of a public REST API for data export and integration with Google Looker Studio for data visualization.
+          - Implemented and maintained an automated reporting system for clients, improving their data analysis capabilities and decision-making processes.
+          - Integrated third-party APIs (e.g., X, Meta) to collect and process social media data, improving the platform's data availability.
     education:
       - institution: IES El Rincón
         area: Cross-platform Applications Development

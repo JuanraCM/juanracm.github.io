@@ -4,8 +4,15 @@ accent_color: &accent_color rgb(31, 85, 95)
 
 design:
   theme: engineeringclassic
+  page:
+    show_top_note: false
+    show_footer: false
+    top_margin: "0.6in"
+    bottom_margin: "0.6in"
   typography:
     font_family: Roboto
+    font_size:
+      name: "25pt"
   colors:
     name: *accent_color
     headline: *accent_color
@@ -15,9 +22,6 @@ design:
   header:
     connections:
       phone_number_format: international
-  page:
-    show_top_note: false
-    show_footer: false
   templates:
     experience_entry:
       date_and_location_column: |-
@@ -40,11 +44,11 @@ cv:
   sections:
     profile:
       - Full Stack developer with 6+ years of experience in building scalable Ruby On Rails applications.
-      - Strong analytical and problem-solving skills, able to adapt to new technologies and frameworks as needed.
+      - Confident in my technical decision-making abilities, with a track record of successfully leading projects and mentoring other developers.
       - Committed to the KISS and SOLID design principles, ensuring maintainable and efficient codebases.
     skills:
       - label: Hard Skills
-        details: Ruby On Rails, REST APIs, PostgreSQL, MongoDB, MySQL, Redis, Sidekiq, Docker, AWS, Terraform, Vue.js, GitHub Copilot, OpenCode.
+        details: Ruby On Rails, Vue.js, REST APIs, PostgreSQL, MongoDB, MySQL, Redis, Sidekiq, Docker, AWS, Terraform, RSpec, Cypress, GitHub Copilot, OpenCode.
       - label: Soft Skills
         details: Effective communication, teamwork, adaptability, problem-solving and strong work ethic.
     experience:
@@ -54,20 +58,20 @@ cv:
         end_date: present
         location: Valencia, Spain
         highlights:
-          - Developed a legal documents database using Ruby On Rails, Vue.js, MongoDB and MySQL.
+          - Developed a SaaS platform for accessing legal documents and AI assisted research using Ruby On Rails, MongoDB and MySQL.
           - Refactored documents indexing system, allowing asynchronous processing and improving system scalability using Sidekiq and Redis.
-          - Led a large-scale document data exportation for AI training purposes.
+          - Led the implementation of a custom high-volume document export system handling 10M+ documents using Solr and Sidekiq, significantly improving export performance and reducing server load.
           - Collaborated on integrating AI tools into the development workflow, enhancing developer productivity and code quality.
       - company: Astara Store
-        position: Full Stack Developer
+        position: Backend Developer
         start_date: 2022-12
         end_date: 2024-04
         location: Madrid, Spain
         highlights:
-          - Designed a SaaS API for building ecommerce products for online vehicle sales, using Ruby On Rails, Vue.js, and PostgreSQL.
-          - Redesigned and maintained infrastructure using AWS and Terraform, mentoring other team members in infrastructure as code to standardize workflow and improve team overall efficiency.
+          - Designed a multi-tenant SaaS API for building ecommerce products for online vehicle sales, using Ruby On Rails and PostgreSQL.
+          - Redesigned and maintained infrastructure using AWS and Terraform, mentoring other team members in infrastructure as code to standardize workflow.
           - Reduced API latency by over 50% across LATAM regions by implementing infrastructure optimizations and caching strategies.
-          - Responsible for infrastructure maintenance and security compliance through automated cybersecurity audits.
+          - Acted as a technical reference for the backend team, providing guidance on complex technical issues and improving overall code quality through code reviews and mentorship.
       - company: Welov
         position: Full Stack Developer
         start_date: 2019-06
@@ -75,12 +79,6 @@ cv:
         location: Las Palmas de Gran Canaria, Spain
         highlights:
           - Developed a social media analytics and measurement platform using Ruby On Rails and MongoDB.
-          - Led the design and implementation of a public REST API for data export and integration with Google Looker Studio for data visualization.
           - Implemented and maintained an automated reporting system for clients, improving their data analysis capabilities and decision-making processes.
+          - Led the design and implementation of a public REST API for data export and integration with Google Looker Studio for data visualization.
           - Integrated third-party APIs (e.g., X, Meta) to collect and process social media data, improving the platform's data availability.
-    education:
-      - institution: IES El Rincón
-        area: Cross-platform Applications Development
-        start_date: 2017-09
-        end_date: 2019-06
-        location: Las Palmas de Gran Canaria, Spain

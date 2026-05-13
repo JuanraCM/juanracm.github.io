@@ -1,3 +1,5 @@
 .direnv/
 build/
 rendercv_output/
+resume.*.yml
+*.pdf

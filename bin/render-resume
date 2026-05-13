@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ $# -eq 0 ]]; then
+  echo "Usage: $(basename "$0") <resume.yml> [output.pdf]" >&2
+  exit 1
+fi
+
+yml_file="$1"
+pdf_path="${2:-./resume.pdf}"
+
+if [[ ! -f "$yml_file" ]]; then
+  echo "Error: file not found: $yml_file" >&2
+  exit 1
+fi
+
+rendercv render "$yml_file" -pdf "$pdf_path"
